@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "hpfunctions.h"
+#include "rules.h"
 using namespace std;
 
 void clearScreen()
@@ -25,6 +26,7 @@ void Play()
 void Rules()
 {
     clearScreen();
+    DisplayRules();
 }
 
 void AddQuestion()

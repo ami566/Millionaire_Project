@@ -1,0 +1,2 @@
+1|Geography|Which is the capital of Brazil?|Brazil&Rio de Janeiro&Sao Paulo&Buenos Aires|Brazil
+25906|Geography|Lisbon is the capital city of:|Portugal&Spain&Argentina&Peru|Portugal

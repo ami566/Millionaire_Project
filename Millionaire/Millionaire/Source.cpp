@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include "hpfunctions.h"
 using namespace std;
 
@@ -36,5 +37,5 @@ void Homepage()
 
 int main()
 {
-    Homepage();
+   Homepage();
 }

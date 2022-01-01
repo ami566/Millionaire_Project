@@ -2,6 +2,7 @@
 #include <iostream>
 #include "hpfunctions.h"
 #include "rules.h"
+#include "questions.h"
 using namespace std;
 
 void clearScreen()
@@ -32,6 +33,7 @@ void Rules()
 void AddQuestion()
 {
     clearScreen();
+    AddQuestionToFile(GetQuestionFromInput());
 }
 
 void EditQuestion()

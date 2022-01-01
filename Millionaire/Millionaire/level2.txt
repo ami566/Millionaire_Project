@@ -1,0 +1,1 @@
+2|Geography|Which continent is Ecuador in?|South America&Asia&Africa&Australia|South America

@@ -12,10 +12,9 @@ using namespace std;
 vector<Question> questions ;
 string filename;
 
-
+// hasn't been tested yet
 void GetQuestions()
 {
-	
 	string buffer;
 	Question q;
 	for (int i = 1; i <= 10; i++)
@@ -108,8 +107,8 @@ Question GetQuestionFromInput()
 	srand(static_cast<unsigned int>(time(nullptr)));
 	string answer;
 	Question q;
-	cout << "Fill out the following fields about the question:\n";
-	cout << "// Please refrain using these symbols: '|' and '&'. //\n\n";
+	cout << "\n\t  Fill out the following fields about the question:\n";
+	cout << "\t//Please refrain using these symbols: '|' and '&'. //\n\n";
 	cout << "Category: ";
 	cin.ignore();
 	getline(cin, q.category);

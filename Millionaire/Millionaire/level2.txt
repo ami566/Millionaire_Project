@@ -1,1 +1,2 @@
 2|Geography|Which continent is Ecuador in?|South America&Asia&Africa&Australia|South America
+7867|Geography|Which ocean does not border Asia's coasts?|The Atlantic ocean&The Pacific ocean&The Arctic ocean&The Indian ocean|The Atlantic ocean

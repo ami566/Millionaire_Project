@@ -3,6 +3,10 @@
 #ifndef HPFUNCTIONS_H
 #define HPFUNCTIONS_H
 
+void Homepage();
+
+void pressAnyKeyToContinueSimulation();
+
 void clearScreen();
 
 void Play();

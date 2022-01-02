@@ -37,5 +37,5 @@ void DisplayRules()
         << "\t7 - $25 000 (second 'guarantee point')\n"
         << "\t8 - $50 000\n"
         << "\t9 - $70 000\n"
-        << "\t10 - $100 000";
+        << "\t10 - $100 000\n\n";
 }

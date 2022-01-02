@@ -59,7 +59,7 @@ void pressAnyKeyToContinueSimulation()
 #elif __linux__
     system("read");
 #else
-    cout << "Press any key and then the Enter key to continue . . .";
+    cout << "Press any key and then the 'Enter' key to continue . . .";
     string n; cin >> n;
 
 #endif
@@ -69,11 +69,11 @@ void Play()
 {
     clearScreen();
     cout << "Let's start";
+    GetQuestions();
 }
 
 void Rules()
 {
-    string smth;
     clearScreen();
     DisplayRules();
 
@@ -84,7 +84,7 @@ void Rules()
 void AddQuestion()
 {
     clearScreen();
-    cout << "\nADD NEW QUESTION\n";
+    cout << "\n   ADD NEW QUESTION FORM\n";
     AddQuestionToFile(GetQuestionFromInput());
     pressAnyKeyToContinueSimulation();
     Homepage();

@@ -5,7 +5,7 @@
 #include <vector>
 
 struct Question {
-	int id;
+	std::string id;
 	std::string level;
 	std::string body;
 	std::string category;

@@ -29,7 +29,7 @@ void GetQuestions()
 				int j = 0;
 				while (j < buffer.size() && buffer[j] != '|') 
 				{
-					q.id += buffer[i++];
+					q.id += buffer[j++];
 				}
 				j++; // in order to skip the '|'
 				while (j < buffer.size() && buffer[j] != '|')
@@ -86,7 +86,7 @@ void AddQuestionToFile(Question q)
 	file.open(filename, std::fstream::out | std::fstream::app);
 	// the question would be saved on the txt file in the following format:
 	// id|category|question|answer&answer&answer&answer|right answer
-	file << to_string(q.id) << '|'
+	file << q.id << '|'
 		<< q.category << '|'
 		<< q.body << '|'
 		<< q.answers[0] << '&'
@@ -128,7 +128,7 @@ Question GetQuestionFromInput()
 	cout << "Answer option #4: ";
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
-	q.id = rand();
+	q.id = to_string(rand());
 	return q;
 }
 

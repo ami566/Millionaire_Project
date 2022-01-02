@@ -69,7 +69,7 @@ void Play()
 {
     clearScreen();
     cout << "Let's start";
-    GetQuestions();
+    GetQuestions(); cout << "Let's start";
 }
 
 void Rules()

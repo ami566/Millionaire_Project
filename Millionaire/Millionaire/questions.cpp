@@ -16,7 +16,7 @@ string filename;
 void GetQuestions()
 {
 	string buffer;
-	Question q;
+	
 	for (int i = 1; i <= 10; i++)
 	{
 		filename = "level" + to_string(i) + ".txt";
@@ -26,12 +26,14 @@ void GetQuestions()
 		if (myFile.is_open()) {
 
 			while (getline(myFile, buffer)) {
+				Question q;
 				int j = 0;
 				while (j < buffer.size() && buffer[j] != '|') 
 				{
 					q.id += buffer[j++];
 				}
 				j++; // in order to skip the '|'
+				q.level = to_string(i);
 				while (j < buffer.size() && buffer[j] != '|')
 				{
 					q.category += buffer[j++];
@@ -43,35 +45,45 @@ void GetQuestions()
 				}
 				j++;
 				
-				string answers;
 				// to get all the answers
-				while (j < buffer.size() && buffer[j] != '|')
+				string aOption;
+				while (j < buffer.size() && buffer[j] != '&')
 				{
-					answers += buffer[j++];
+					aOption += buffer[j++];
 				}
+				q.answers.emplace_back(aOption);
+				aOption = "";
+				j++;
+
+				while (j < buffer.size() && buffer[j] != '&')
+				{
+					aOption += buffer[j++];
+				}
+				q.answers.emplace_back(aOption);
+				aOption = "";
+				j++;
+
+				while (j < buffer.size() && buffer[j] != '&')
+				{
+					aOption += buffer[j++];
+				}
+				q.answers.emplace_back(aOption);
+				aOption = "";
 				j++;
 				
-				// to separate the different answer options and add them to the answers array of the question
-				int k = 0;
-				int answersNo = 0;
-				string aOption;
-				while (k<answers.size())
+				while (j < buffer.size() && buffer[j] != '|')
 				{
-					if (answers[k]=='&')
-					{
-						q.answers[answersNo] = aOption;
-						aOption = "";
-						answersNo++;
-						continue;
-					}
-					aOption += answers[k++];
+					aOption += buffer[j++];
 				}
+				q.answers.emplace_back(aOption);
+				aOption = "";
+				j++;
 
 				while (j < buffer.size()) 
 				{
 					q.rigthAnswer += buffer[j++];
 				}
-				questions.emplace_back(q);
+				questions.emplace_back(q); // adds the question to the questions list
 			}
 			
 		}

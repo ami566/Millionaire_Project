@@ -1,0 +1,5 @@
+16164|Geography|What country has the most natural lakes?|Canada&Russia&China&Norway|Canada
+34343|History|What is believed to be the oldest thing ever discovered on Earth?|A Lomekwi tool&Sculpture representing a human&A Jack Hills' zicron crystal&A flute|A Jack Hills' zicron crystal
+67676|History|Which type of aircraft was used to bomb Hiroshima, Japan, in World War II?|B-29 Superfortress&B-17 Flying Fortress&B-24 Liberator&B-52 Stratofortress|B-29 Superfortress
+90009|Science|Tetraethyl lead is used as:|Pain killer&Fire extinguisher&Mosquito repellent&Petrol additive|Petrol additive
+67000|Geography|What is the only European country that still has territory on the South American continent?|Great Britain&France&Portugal&Spain|France

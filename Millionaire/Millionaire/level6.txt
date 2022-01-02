@@ -1,0 +1,6 @@
+15324|Geography|Which country does the Equator not cross?|Chile&Colombia&Indonesia&Kenya|Chile
+12890|Geography|What is the name of the tallest mountain in the world from the Earth base to peak?|Mt. Everest&K2&Mauna Kea&Mount Chimborazo|Mauna Kea
+26738|Science|Which disease is caused by a mutation on chromosome 21?|Jacobsen syndrome&Turner syndrome&Thalassemia&Down syndrome|Down syndrome
+74382|Science|What are diamonds, the hardest material known to date, made of?|Carbon&Titanium&Iron&Copper|Carbon
+56781|History|Which peasant girl led the French army at Orléans during the Hundred Years’ War?|Elizabeth I&Mathilde of Flanders&Joan of Arc&Eleanor of Aquitaine|Joan of Arc
+25612|History|Which famous monument did Shah Jahān build to immortalize his wife?|Golestan Palace&Angkor Wat&The Jāmeh mosque of Isfahān&Taj Mahal|Taj Mahal

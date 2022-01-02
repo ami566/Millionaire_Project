@@ -86,6 +86,7 @@ void AddQuestion()
     clearScreen();
     cout << "\n   ADD NEW QUESTION FORM\n";
     AddQuestionToFile(GetQuestionFromInput());
+    cout << endl;
     pressAnyKeyToContinueSimulation();
     Homepage();
 }

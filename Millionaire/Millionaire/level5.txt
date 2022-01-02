@@ -1,0 +1,5 @@
+15040|Geography|In which city would you find La Sagrada Familia?|Barcelona&Madrid&Lisbon&Valencia|Barcelona
+12353|History|Who is called the "father of history"?|Herodotus&Sophocles&Epicurus&Hippocrates|Herodotus
+23672|Science|What is Anthropology the study of?|structure and functions&heredity and variations&life in outer space&structural and cultural traits of human beings|structural and cultural traits of human beings
+23608|Science|Non stick cooking utensils are coated with:|Teflon&PVC&Black paint&Polystyrene|Teflon
+32133|Geography|In which country is the Suez Canal located?|Egypt&Algeria&Saudi Arabia&South Africa|Egypt

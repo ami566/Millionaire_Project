@@ -1,0 +1,5 @@
+15569|Geography|In what colors is the national flag of Senegal?|green, yellow, red&blue, yellow, red&green, white, red&green, white, orange|green, yellow, red
+25609|History|Between which countries was The Football War, also known as The 100 Hour war, in 1969?|Mexico and  the United States&Honduras and El Salvador&Brazil and Argentina&Iran and Saudi Arabia|Honduras and El Salvador
+9836|History|In whose memory did Alexander the Great found the city Bucephala?|Mother&General&Horse&Wife|Horse
+2345|Science|Which of the following is a non metal that remains liquid at room temperature?|Phosphorus&Bromine&Chlorine&Helium|Bromine
+4321|Geography|The USA has the most stars of any flag with 50. What country's flag comes in second with 27?|Australia&Brazil&Bosnia and Herzegovina&Uzbekistan|Brazil

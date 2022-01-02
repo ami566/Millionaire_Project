@@ -1,0 +1,5 @@
+16376|Geography|Mount Vesuvius overlooks which present-day Italian city?|Naples&Bologna&Turin&Palermo|Naples
+5666|Geography|Which city is known as the Glass Capital of the World?|Venice, Italy&Toledo, OH&New York, NY&Nimes, France|Toledo, OH
+78772|Science|In which of the following activities is silicon carbide used?|Making cement and glass&Disinfecting water of ponds&Cutting very hard substances&Making casts for statues|Cutting very hard substances
+11111|History|Who was the only one of Henry VIII’s wives to receive a Queen’s funeral?|Jane Seymour&Catherine Parr&Anne Boleyn&Catherine of Aragon|Jane Seymour
+3333|History|Which dictator composed six operas?|Kim Jong-il&Mao Tse-Tung&Adolf Hitler&Kim il-Sung|Kim Jong-il

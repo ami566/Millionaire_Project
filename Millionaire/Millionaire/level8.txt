@@ -3,3 +3,6 @@
 77877|Science|What does pH stand for?|Powerful Hydraulics&Purpose of Hydrogen&Potential of Hydrogen&Power of Hydrolysis|Potential of Hydrogen
 65666|Science|In fireworks, the green flame is produced because of:|Magnesium&Barium&Mercury&Potassium|Barium
 45440|History|Which war holds the title "the shortest war in history" with the duration of 38 minutes?|Russo-Georgian war, 2008&Indo-Pakistani war, 1971&Anglo-Zanzibar war, 1896&Serbo-Bulgarian war, 1885|Anglo-Zanzibar war, 1896
+13784|Culture|Stratus and cumulus are types of what?|Clouds&Layers of Earth&Types soil&Two types of mushroom|Clouds
+21020|Culture|What is the Cockney slang for beer?|Pig's ear&Porky pies&Apples and pears&Gypsy's kiss|Pig's ear
+25706|Culture|In 2020, Netflix aired a reality show that required participants to remain celibate. What was it called?|Too Hot To Handle&Love Island&Singled Out&The Circle|Too Hot To Handle

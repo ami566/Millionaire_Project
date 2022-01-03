@@ -4,3 +4,8 @@
 74382|Science|What are diamonds, the hardest material known to date, made of?|Carbon&Titanium&Iron&Copper|Carbon
 56781|History|Which peasant girl led the French army at Orléans during the Hundred Years’ War?|Elizabeth I&Mathilde of Flanders&Joan of Arc&Eleanor of Aquitaine|Joan of Arc
 25612|History|Which famous monument did Shah Jahān build to immortalize his wife?|Golestan Palace&Angkor Wat&The Jāmeh mosque of Isfahān&Taj Mahal|Taj Mahal
+26978|Culture|At which historical building would you find wardens called Beefeaters?|The London Tower&Buckingham palace&Westminster Abbey&Windsor Castle|The London Tower
+12595|Culture|In Greek mythology, Narcissus fell in love with his own image when it was reflected in what?|A pool of water&A mirror&A spoon&Cat's eyes|A pool of water
+24253|Culture|Which of the following names is not of one of Kim Kardashian and Kanye West's kids?|Stormi&North&Psalm&Chicago|Stormi
+28952|Culture|What is the highest-grossing R-rated movie of all time?|Joker&Deadpool 2&The Matrix Reloaded&It|Joker
+30850|Culture|In 'Friends' whom did Ros Geller not divorce?|Mona&Emily&Rachel&Carol|Mona

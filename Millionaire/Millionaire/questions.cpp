@@ -12,7 +12,6 @@ using namespace std;
 vector<Question> questions ;
 string filename;
 
-// hasn't been tested yet
 void GetQuestions()
 {
 	string buffer;
@@ -107,7 +106,6 @@ void AddQuestionToFile(Question q)
 		<< q.answers[3] << '|'
 		<< q.rigthAnswer << '\n';
 	file.close();
-
 }
 
 void EditQuestion(Question q)
@@ -119,32 +117,63 @@ Question GetQuestionFromInput()
 	srand(static_cast<unsigned int>(time(nullptr)));
 	string answer;
 	Question q;
-	cout << "\n\t  Fill out the following fields about the question:\n";
-	cout << "\t//Please refrain using these symbols: '|' and '&'. //\n\n";
-	cout << "Category: ";
+	cout << "\n\t\t  Fill out the following fields about the question:\n"
+	     << "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n";
+
+	cout << "  Choose from the already available categories or type a new one:\n   | ";
+	for (auto& item : GetCategories())
+	{
+		cout << item << " | ";
+	}
+	cout << "\n\n  Category: ";
 	cin.ignore();
 	getline(cin, q.category);
-	cout << "Difficulty level: ";
+	cout << "  Difficulty level: ";
 	getline(cin, q.level);
-	cout << "Question: ";
+	cout << "  Question: ";
 	getline(cin, q.body);
-	cout << "Answer option #1 (Right answer): ";
+	cout << "  Answer option #1 (Right answer): ";
 	getline(cin, q.rigthAnswer);
 	q.answers.emplace_back(q.rigthAnswer);
-	cout << "Answer option #2: ";
+	cout << "  Answer option #2: ";
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
-	cout << "Answer option #3: ";
+	cout << "  Answer option #3: ";
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
-	cout << "Answer option #4: ";
+	cout << "  Answer option #4: ";
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
 	q.id = to_string(rand());
+	//questions.emplace_back(q);
 	return q;
 }
 
-//vector<string> GetGategories(vector<Question> questions)
-//{
-//	return;
-//}
+vector<string> GetCategories()
+{
+	// checks if the questions vector is empty and if it is, we populate it with the questions from the text files
+	// the questions vector can already contain elements if we have called the GetQuestions function previously during the program
+	if (questions.empty())
+	{
+		GetQuestions();
+	}
+	vector<string> categories;
+	bool containsCategory = false;
+	for (auto& q : questions)
+	{
+		for (auto& c : categories)
+		{
+			if (q.category==c)
+			{
+				containsCategory = true; 
+				break;
+			}
+		}
+		if (!containsCategory)
+		{
+			categories.emplace_back(q.category);
+		}
+		containsCategory = false;
+	}
+	return categories;
+}

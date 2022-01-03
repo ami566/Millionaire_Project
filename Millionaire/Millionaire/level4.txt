@@ -2,3 +2,5 @@
 54323|Geography|Which of the following combinations is consisted of a country and its capital city?|Nepal - Katmandu&Turkey - Istanbul&New Zealand - Auckland&Canada - Toronto|Nepal - Katmandu
 2379|Science|Which of the following acids does not contain oxygen?|Sulphuric acid&Hydrochloric acid&Nitric acid&Phosphoric acid|Hydrochloric acid
 26890|History|What was found in the Varna Necropolis in Varna, Bulgaria?|the oldest human skeleton&the  oldest bracelet&the oldest gold treasure&the oldest linen dress|the oldest gold treasure
+17436|Culture|Which of the following dances is not of European origin?|Foxtrot&Menuet&Polka&Waltz|Foxtrot
+720|Culture|Which Marvel superhero was the first to make it to the big screen?|Iron Man&Captain America&Thor&Hulk|Iron Man

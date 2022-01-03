@@ -60,7 +60,8 @@ void pressAnyKeyToContinueSimulation()
     system("read");
 #else
     cout << "Press any key and then the 'Enter' key to continue . . .";
-    string n; cin >> n;
+    string n; 
+    cin >> n;
 
 #endif
 }
@@ -69,7 +70,7 @@ void Play()
 {
     clearScreen();
     cout << "Let's start";
-    GetQuestions(); cout << "Let's start";
+    GetQuestions();
 }
 
 void Rules()

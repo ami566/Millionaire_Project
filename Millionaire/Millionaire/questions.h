@@ -21,6 +21,6 @@ void EditQuestion(Question q);
 
 Question GetQuestionFromInput();
 
-//vector<string> GetGategories(vector<Question> questions);
+std::vector<std::string> GetCategories();
 
 #endif	

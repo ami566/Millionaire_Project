@@ -3,3 +3,6 @@
 67676|History|Which type of aircraft was used to bomb Hiroshima, Japan, in World War II?|B-29 Superfortress&B-17 Flying Fortress&B-24 Liberator&B-52 Stratofortress|B-29 Superfortress
 90009|Science|Tetraethyl lead is used as:|Pain killer&Fire extinguisher&Mosquito repellent&Petrol additive|Petrol additive
 67000|Geography|What is the only European country that still has territory on the South American continent?|Great Britain&France&Portugal&Spain|France
+18832|Culture|Which dialect is associated with the East End of London?|Cockney&Estuary&Cardiff&Surrey|Cockney
+24639|Culture|What modern-day item made a cameo in the final season of Game of Thrones?|A Starbucks cup&A phone&A lipstick&A Gucci wallet|A Starbucks cup
+28058|Culture|What's the name of the dwarf who accompanies Frodo on his quest in the Lord of the Rings films?|Gimli&Thorin&Borin&Dwalin|Gimli

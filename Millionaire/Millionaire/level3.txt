@@ -2,3 +2,5 @@
 17825|Geography|Which is the smallest country in the world?|Monaco&San Marino&Lichtenstein&Vatican city|Vatican city
 67829|Science|The concept of gravity was discovered by which famous physicist?|Sir Isaac Newton&Albert Einstein&Galileo Galilei&Niels Bohr|Sir Isaac Newton
 98763|History|The Golden Age of the First Bulgarian Empire, period of the Bulgarian cultural prosperity, was during the reign of which ruler?|Simeon I the Great&Ivan Asen II&Boris I&Petar I|Simeon I the Great
+18122|Culture|The word 'alphabet' if formed from the first two letters of which language?|Greek&Latin&English&Russian|Greek
+32548|Culture|In which country was 'The Vampire Diaries' star Nina Dobrev born?|Bulgaria&Ukraine&Canada&Russia|Bulgaria

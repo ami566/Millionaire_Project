@@ -122,48 +122,48 @@ void EditQ(Question q)
 	cout << "\n\t\t  Fill out the following fields about the question:\n"
 		<< "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n"
 		<< "\t!!! If you don't want to edit the field you are on, type '@!'\n "
-		<< "and the original value would remain, otherwise just type your new entry!!!\n";
+		<< "\tand the original value would remain, otherwise just type your new entry!!!\n";
 
-	cout << "\n\n  ID: " << q.id << " (Not changeable)";
-	cout << "\n  Difficulty level: " << q.level << " (Not changeable)";
-	cout << "\n  Category: ";
+	cout << "\n\n\t  ID: " << q.id << " (Not changeable)";
+	cout << "\n\t  Difficulty level: " << q.level << " (Not changeable)";
+	cout << "\n\t  Category: ";
 	cin.ignore();
 	getline(cin, input);
 	if (input != "@!")
 	{
 		q.category = input;
 	}
-	cout << "  Question: ";
+	cout << "\t  Question: ";
 	getline(cin, input);
 	if (input != "@!")
 	{
 		q.body = input;
 	}
-	cout << "  Answer option #1: ";
+	cout << "\t  Answer option #1: ";
 	getline(cin, input);
 	if (input != "@!")
 	{
 		q.answers[0] = input;
 	}
-	cout << "  Answer option #2: ";
+	cout << "\t  Answer option #2: ";
 	getline(cin, input);
 	if (input != "@!")
 	{
 		q.answers[1] = input;
 	}
-	cout << "  Answer option #3: ";
+	cout << "\t  Answer option #3: ";
 	getline(cin, input);
 	if (input != "@!")
 	{
 		q.answers[2] = input;
 	}
-	cout << "  Answer option #4: ";
+	cout << "\t  Answer option #4: ";
 	getline(cin, input);
 	if (input != "@!")
 	{
 		q.answers[3] = input;
 	}
-	cout << "  Right answer: ";
+	cout << "\t  Right answer: ";
 	getline(cin, input);
 	if (input != "@!")
 	{
@@ -228,15 +228,15 @@ void PrintQ(Question q)
 
 void PrintWholeQ(Question q)
 {
-	cout << "  Id: " << q.id << endl
-		<< "  Difficulty level: " << q.level << endl
-		<< "  Category: " << q.category << endl
-		<< "  Question: " << q.body << endl
-		<< "  Answer option #1: " << q.answers[0] << endl
-		<< "  Answer option #2: " << q.answers[1] << endl
-		<< "  Answer option #3: " << q.answers[2] << endl
-		<< "  Answer option #4: " << q.answers[3] << endl
-		<< "  Right answer: " << q.rigthAnswer << endl;
+	cout << "\t  Id: " << q.id << endl
+		<< "\t  Difficulty level: " << q.level << endl
+		<< "\t  Category: " << q.category << endl
+		<< "\t  Question: " << q.body << endl
+		<< "\t  Answer option #1: " << q.answers[0] << endl
+		<< "\t  Answer option #2: " << q.answers[1] << endl
+		<< "\t  Answer option #3: " << q.answers[2] << endl
+		<< "\t  Answer option #4: " << q.answers[3] << endl
+		<< "\t  Right answer: " << q.rigthAnswer << endl;
 }
 
 Question* FindQuestionById(string id)

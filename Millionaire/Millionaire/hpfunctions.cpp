@@ -136,29 +136,26 @@ void EditQuestionHome()
     }
     cout << "\n Type the ID of the question you would like to edit: ";
     
-    Question qToEdit;
     string id;
     cin >> id;
-   // qToEdit = ;
     while (FindQuestionById(id)==NULL)
     {
-        cout << "\nInvalid ID! Please type it again: ";
+        cout << "Invalid ID! Please type it again: ";
         cin >> id;
-       // qToEdit = FindQuestionById(id);
     }
     EditQuestion(*(FindQuestionById(id)));
 }
 
-void EditQuestion(Question qToEdit)
+void EditQuestion(Question q)
 { 
     clearScreen();
-    cout << "\n   EDIT QUESTION FORM\n";
-    cout << "\n\n   This is the question of your choice: \n\n";
+    cout << "\n\t\t\t\t\t\t   EDIT QUESTION FORM\n"
+        << "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    cout << "\n\t\t\t\t\t   This is the question of your choice: \n";
+    PrintWholeQ(q);
+    cout<< "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+    EditQ(q);
 
-    PrintWholeQ(qToEdit);
-    EditQ(qToEdit);
-
-    //PrintWholeQ(FindQuestionById(id));
     pressAnyKeyToContinueSimulation();
     clearScreen();
     Homepage();

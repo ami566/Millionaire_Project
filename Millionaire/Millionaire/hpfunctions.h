@@ -16,7 +16,7 @@ void Rules();
 
 void AddQuestion();
 
-void EditQuestion(Question qToEdit);
+void EditQuestion(Question q);
 
 void EditQuestionHome();
 

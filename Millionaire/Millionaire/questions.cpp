@@ -47,36 +47,18 @@ void GetQuestions()
 				
 				// to get all the answers
 				string aOption;
-				while (j < buffer.size() && buffer[j] != '&')
-				{
-					aOption += buffer[j++];
-				}
-				q.answers.emplace_back(aOption);
-				aOption = "";
-				j++;
-
-				while (j < buffer.size() && buffer[j] != '&')
-				{
-					aOption += buffer[j++];
-				}
-				q.answers.emplace_back(aOption);
-				aOption = "";
-				j++;
-
-				while (j < buffer.size() && buffer[j] != '&')
-				{
-					aOption += buffer[j++];
-				}
-				q.answers.emplace_back(aOption);
-				aOption = "";
-				j++;
-				
 				while (j < buffer.size() && buffer[j] != '|')
 				{
+					if (buffer[j]=='&')
+					{
+						q.answers.emplace_back(aOption);
+						aOption = "";
+						j++; 
+						continue;
+					}
 					aOption += buffer[j++];
 				}
 				q.answers.emplace_back(aOption);
-				aOption = "";
 				j++;
 
 				while (j < buffer.size()) 
@@ -85,13 +67,12 @@ void GetQuestions()
 				}
 				questions.emplace_back(q); // adds the question to the questions list
 			}
-			
 		}
 		myFile.close();
 	}
 }
 
-void AddQuestionToFile(Question &q)
+void AddQuestionToFile(Question q)
 {
 	filename = "level" + q.level +".txt";
 	std::fstream file;

@@ -14,6 +14,7 @@ string filename;
 
 void GetQuestions()
 {
+	questions.clear();
 	string buffer;
 	
 	for (int i = 1; i <= 10; i++)
@@ -90,7 +91,7 @@ void GetQuestions()
 	}
 }
 
-void AddQuestionToFile(Question q)
+void AddQuestionToFile(Question &q)
 {
 	filename = "level" + q.level +".txt";
 	std::fstream file;
@@ -110,6 +111,7 @@ void AddQuestionToFile(Question q)
 
 void EditQuestion(Question q)
 {
+
 }
 
 Question GetQuestionFromInput()
@@ -145,7 +147,7 @@ Question GetQuestionFromInput()
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
 	q.id = to_string(rand());
-	//questions.emplace_back(q);
+	questions.emplace_back(q);
 	return q;
 }
 

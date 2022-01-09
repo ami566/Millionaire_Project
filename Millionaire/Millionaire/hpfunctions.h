@@ -1,4 +1,5 @@
 #pragma once
+#include "questions.h"
 // homepageFunctions header
 #ifndef HPFUNCTIONS_H
 #define HPFUNCTIONS_H
@@ -15,7 +16,7 @@ void Rules();
 
 void AddQuestion();
 
-void EditQuestion(std::string id);
+void EditQuestion(Question qToEdit);
 
 void EditQuestionHome();
 

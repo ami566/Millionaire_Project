@@ -239,15 +239,16 @@ void PrintWholeQ(Question q)
 		<< "  Right answer: " << q.rigthAnswer << endl;
 }
 
-Question FindQuestionById(string id)
+Question* FindQuestionById(string id)
 {
 	for (auto& q : questions)
 	{
 		if (q.id==id)
 		{
-			return q;
+			return &q;
 		}
 	}
+	return  NULL;
 }
 
 Question GetQuestionFromInput()

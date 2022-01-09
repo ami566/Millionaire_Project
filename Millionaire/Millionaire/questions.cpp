@@ -1,16 +1,28 @@
 #include "questions.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 #include <string>
 #include <stdlib.h> 
 #include <stdio.h>
 #include <time.h> 
+//#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
 vector<Question> questions ;
 string filename;
+
+void FillQuestions()
+{
+	// checks if the questions vector is empty and if it is, we populate it with the questions from the text files
+	// the questions vector can already contain elements if we have called the GetQuestions function previously during the program
+	if (questions.empty())
+	{
+		GetQuestions();
+	}
+}
 
 void GetQuestions()
 {
@@ -88,9 +100,63 @@ void AddQuestionToFile(Question q)
 		<< q.answers[3] << '|'
 		<< q.rigthAnswer << '\n';
 	file.close();
+	questions.emplace_back(q);
 }
 
 void EditQuestion(Question q)
+{
+
+}
+
+void stringToLower(string& s)
+{
+	transform(s.begin(), s.end(), s.begin(), ::tolower);
+}
+
+std::string returnStringToLower(std::string s)
+{
+	transform(s.begin(), s.end(), s.begin(), ::tolower);
+	return s;
+}
+
+void DisplayQuestions(string keyword = "")
+{
+	FillQuestions();
+	
+	if (keyword == "")
+	{
+		for (auto& q : questions)
+		{
+			PrintQ(q);
+		}
+		return;
+	}
+	
+	stringToLower(keyword);
+	for (auto& q : questions)
+	{
+		string answers;
+		for (auto& a : q.answers)
+		{
+			answers += a + " ";
+		}
+		stringToLower(answers);
+		
+		if (returnStringToLower(q.category).find(keyword)!= string::npos || returnStringToLower(q.body).find(keyword) != string::npos || 
+			returnStringToLower(q.body).find(keyword) != string::npos || answers.find(keyword) != string::npos)
+		{
+			PrintQ(q);
+		}
+	}
+	
+}
+
+void PrintQ(Question q)
+{
+	cout << q.id << ": " << q.body << endl;
+}
+
+void PrintWholeQ(Question q)
 {
 
 }
@@ -128,18 +194,14 @@ Question GetQuestionFromInput()
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
 	q.id = to_string(rand());
-	questions.emplace_back(q);
+	//questions.emplace_back(q);
 	return q;
 }
 
 vector<string> GetCategories()
 {
-	// checks if the questions vector is empty and if it is, we populate it with the questions from the text files
-	// the questions vector can already contain elements if we have called the GetQuestions function previously during the program
-	if (questions.empty())
-	{
-		GetQuestions();
-	}
+	FillQuestions();
+
 	vector<string> categories;
 	bool containsCategory = false;
 	for (auto& q : questions)

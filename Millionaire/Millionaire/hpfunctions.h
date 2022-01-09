@@ -15,7 +15,9 @@ void Rules();
 
 void AddQuestion();
 
-void EditQuestion();
+void EditQuestion(std::string id);
+
+void EditQuestionHome();
 
 void InvalidInput();
 

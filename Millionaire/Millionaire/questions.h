@@ -15,9 +15,21 @@ struct Question {
 
 void GetQuestions();
 
+void FillQuestions();
+
 void AddQuestionToFile(Question q);
 
+void DisplayQuestions(std::string keyword = "");
+
 void EditQuestion(Question q);
+
+void PrintQ(Question q);
+
+void PrintWholeQ(Question q);
+
+string returnStringToLower(std::string s);
+
+void stringToLower(std::string &s);
 
 Question GetQuestionFromInput();
 

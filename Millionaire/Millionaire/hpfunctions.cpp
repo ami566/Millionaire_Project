@@ -4,11 +4,11 @@
 #include "rules.h"
 #include "questions.h"
 #include <iomanip>
+#include <string>
 using namespace std;
 
 void Homepage()
 {
-    clearScreen();
     int option;
     cout << "\n\n\n" << setw(70) << "WHO WANTS TO BE A MILLIONAIRE\n" << setfill('*')
         << setw(150) << "\n\t  A quiz game presented to you by Amira Emin\n";
@@ -30,7 +30,7 @@ void Homepage()
         break;
     case 3: AddQuestion();
         break;
-    case 4: EditQuestion();
+    case 4: EditQuestionHome();
         break;
     case 5: return;
     default: InvalidInput(); // have to edit
@@ -70,7 +70,7 @@ void Play()
 {
     clearScreen();
     cout << "Let's start";
-    GetQuestions();
+    FillQuestions();
 }
 
 void Rules()
@@ -89,15 +89,50 @@ void AddQuestion()
     AddQuestionToFile(GetQuestionFromInput());
     cout << endl;
     pressAnyKeyToContinueSimulation();
+    clearScreen();
     Homepage();
 }
 
-void EditQuestion()
+void EditQuestionHome()
+{
+    clearScreen();
+    
+    cout << "\n  Do you want all the questions to be displayed or would you want\n"
+         << "  to search for a specific question with a keyword/s to edit it?\n";
+    cout << "\n  Type 'a'/'A' for all questions or 's'/'S' to search: ";
+    string opt;
+    cin >> opt;
+    opt = returnStringToLower(opt);
+    clearScreen();
+    cout << "\n   EDIT QUESTION FORM\n";
+    cout << "\n //'id: question' format of display//\n";
+
+    if (opt == "a")
+    {
+        cout << "\n   All questions are being displayed.\n\n";
+        DisplayQuestions("");
+    }
+    else if (opt == "s")
+    {
+        cout << "Type in a keyword/s: ";
+        string keyword;
+        getline(cin, keyword);
+        DisplayQuestions(keyword);
+    }
+    cout << "Type the ID of the question you would like to edit: ";
+    string id;
+    cin >> id;
+    EditQuestion(id);
+   
+}
+
+void EditQuestion(string id)
 {
     clearScreen();
 }
 
 void InvalidInput() 
 {
-    cout << "\nInvalid input! Please type your choice again: ";
+    clearScreen();
+    cout << "\n  Invalid input! Please try typing your choice again! \n\n";
 }

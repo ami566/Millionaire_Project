@@ -103,7 +103,77 @@ void AddQuestionToFile(Question q)
 	questions.emplace_back(q);
 }
 
-void EditQuestion(Question q)
+void EditQ(Question q)
+{
+	int index = 0;
+	for (auto& item : questions)
+	{
+		if (item.id==q.id)
+		{
+			break;
+		}
+		index++;
+	}
+
+	questions.erase(questions.begin()+index);
+
+	string input;
+	
+	cout << "\n\t\t  Fill out the following fields about the question:\n"
+		<< "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n"
+		<< "\t!!! If you don't want to edit the field you are on, type '@!'\n "
+		<< "and the original value would remain, otherwise just type your new entry!!!\n";
+
+	cout << "\n\n  ID: " << q.id << " (Not changeable)";
+	cout << "\n  Difficulty level: " << q.level << " (Not changeable)";
+	cout << "\n  Category: ";
+	cin.ignore();
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.category = input;
+	}
+	cout << "  Question: ";
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.body = input;
+	}
+	cout << "  Answer option #1: ";
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.answers[0] = input;
+	}
+	cout << "  Answer option #2: ";
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.answers[1] = input;
+	}
+	cout << "  Answer option #3: ";
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.answers[2] = input;
+	}
+	cout << "  Answer option #4: ";
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.answers[3] = input;
+	}
+	cout << "  Right answer: ";
+	getline(cin, input);
+	if (input != "@!")
+	{
+		q.rigthAnswer = input;
+	}
+	questions.emplace_back(q);
+	RewriteFile(q.level);
+}
+
+void RewriteFile(string fileNum)
 {
 
 }
@@ -113,13 +183,13 @@ void stringToLower(string& s)
 	transform(s.begin(), s.end(), s.begin(), ::tolower);
 }
 
-std::string returnStringToLower(std::string s)
+string returnStringToLower(std::string s)
 {
 	transform(s.begin(), s.end(), s.begin(), ::tolower);
 	return s;
 }
 
-void DisplayQuestions(string keyword = "")
+void DisplayQuestions(string keyword)
 {
 	FillQuestions();
 	
@@ -153,12 +223,31 @@ void DisplayQuestions(string keyword = "")
 
 void PrintQ(Question q)
 {
-	cout << q.id << ": " << q.body << endl;
+	cout << "  " << q.id << ": " << q.body << endl;
 }
 
 void PrintWholeQ(Question q)
 {
+	cout << "  Id: " << q.id << endl
+		<< "  Difficulty level: " << q.level << endl
+		<< "  Category: " << q.category << endl
+		<< "  Question: " << q.body << endl
+		<< "  Answer option #1: " << q.answers[0] << endl
+		<< "  Answer option #2: " << q.answers[1] << endl
+		<< "  Answer option #3: " << q.answers[2] << endl
+		<< "  Answer option #4: " << q.answers[3] << endl
+		<< "  Right answer: " << q.rigthAnswer << endl;
+}
 
+Question FindQuestionById(string id)
+{
+	for (auto& q : questions)
+	{
+		if (q.id==id)
+		{
+			return q;
+		}
+	}
 }
 
 Question GetQuestionFromInput()

@@ -15,19 +15,23 @@ struct Question {
 
 void GetQuestions();
 
+Question FindQuestionById(std::string id);
+
 void FillQuestions();
 
 void AddQuestionToFile(Question q);
 
-void DisplayQuestions(std::string keyword = "");
+void DisplayQuestions(std::string keyword);
 
-void EditQuestion(Question q);
+void EditQ(Question q);
 
 void PrintQ(Question q);
 
 void PrintWholeQ(Question q);
 
-string returnStringToLower(std::string s);
+void RewriteFile(std::string fileNum);
+
+std::string returnStringToLower(std::string s);
 
 void stringToLower(std::string &s);
 

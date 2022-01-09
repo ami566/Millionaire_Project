@@ -24,16 +24,24 @@ void Homepage()
 
     switch (option)
     {
-    case 1: Play();
+    case 1: 
+        Play();
         break;
-    case 2: Rules();
+    case 2: 
+        Rules();
         break;
-    case 3: AddQuestion();
+    case 3: 
+        AddQuestion();
         break;
-    case 4: EditQuestionHome();
+    case 4: 
+        clearScreen();
+        EditQuestionHome();
         break;
-    case 5: return;
-    default: InvalidInput(); // have to edit
+    case 5: 
+        return;
+    default: 
+        InvalidInput();
+        Homepage();
         break;
     }
 }
@@ -95,7 +103,7 @@ void AddQuestion()
 
 void EditQuestionHome()
 {
-    clearScreen();
+    cout << "\n   CHOOSE QUESTION TO EDIT\n";
     
     cout << "\n  Do you want all the questions to be displayed or would you want\n"
          << "  to search for a specific question with a keyword/s to edit it?\n";
@@ -105,7 +113,7 @@ void EditQuestionHome()
     opt = returnStringToLower(opt);
     clearScreen();
     cout << "\n   EDIT QUESTION FORM\n";
-    cout << "\n //'id: question' format of display//\n";
+    cout << "\n //'ID: question' format of display//\n";
 
     if (opt == "a")
     {
@@ -114,21 +122,39 @@ void EditQuestionHome()
     }
     else if (opt == "s")
     {
-        cout << "Type in a keyword/s: ";
+        cout << "\nType in a keyword/s: ";
         string keyword;
+        cin.ignore();
         getline(cin, keyword);
+        cout << "\n   Questions that contain the keyword in their category, body, or in their answers are being displayed.\n\n";
         DisplayQuestions(keyword);
     }
-    cout << "Type the ID of the question you would like to edit: ";
+    else
+    {
+        InvalidInput();
+        EditQuestionHome();
+    }
+    cout << "\n Type the ID of the question you would like to edit: ";
     string id;
     cin >> id;
     EditQuestion(id);
-   
 }
 
 void EditQuestion(string id)
-{
+{ 
     clearScreen();
+    cout << "\n   EDIT QUESTION FORM\n";
+    cout << "\n\n   This is the question of your choice: \n\n";
+
+    Question qToEdit = FindQuestionById(id);
+
+    PrintWholeQ(qToEdit);
+    EditQ(qToEdit);
+
+    PrintWholeQ(FindQuestionById(id));
+    pressAnyKeyToContinueSimulation();
+    clearScreen();
+    Homepage();
 }
 
 void InvalidInput() 

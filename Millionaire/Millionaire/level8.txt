@@ -1,5 +1,5 @@
 16000|Geography|How many timezones does Russia have?|11&8&10&12|11
-35666|Geography|In which European city would you find Manneken Pis – a statue of a small boy urinating into a fountain?|Amsterdam&Copenhagen&Brussels&Prague|Brussels
+35666|Geography|In which European city would you find Manneken Pis - a statue of a small boy urinating into a fountain?|Amsterdam&Copenhagen&Brussels&Prague|Brussels
 77877|Science|What does pH stand for?|Powerful Hydraulics&Purpose of Hydrogen&Potential of Hydrogen&Power of Hydrolysis|Potential of Hydrogen
 65666|Science|In fireworks, the green flame is produced because of:|Magnesium&Barium&Mercury&Potassium|Barium
 45440|History|Which war holds the title "the shortest war in history" with the duration of 38 minutes?|Russo-Georgian war, 2008&Indo-Pakistani war, 1971&Anglo-Zanzibar war, 1896&Serbo-Bulgarian war, 1885|Anglo-Zanzibar war, 1896

@@ -23,6 +23,8 @@ void FillQuestions();
 
 void AddQuestionToFile(Question q);
 
+void AddQuestionToList(Question q);
+
 void DisplayQuestions(std::string keyword);
 
 void EditQ(Question q);

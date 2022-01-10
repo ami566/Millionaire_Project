@@ -83,7 +83,7 @@ void GetQuestions()
 				{
 					q.rigthAnswer += buffer[j++];
 				}
-				questions.emplace_back(q); // adds the question to the questions list
+				AddQuestionToList(q); // adds the question to the questions list
 			}
 		}
 		myFile.close();
@@ -106,7 +106,6 @@ void AddQuestionToFile(Question q)
 		<< q.answers[3] << '|'
 		<< q.rigthAnswer << '\n';
 	file.close();
-	questions.emplace_back(q);
 }
 
 void EditQ(Question q)
@@ -175,13 +174,30 @@ void EditQ(Question q)
 	{
 		q.rigthAnswer = input;
 	}
-	questions.emplace_back(q);
+	AddQuestionToList(q);
 	RewriteFile(q.level);
 }
 
-void RewriteFile(string fileNum)
+void RewriteFile(string level)
 {
+	filename = "level" + level + ".txt";
+	// we open the text file with the trunc option and then close it to delete its contents
+	std::fstream file;
+	file.open(filename, std::fstream::out | std::fstream::trunc);
+	file.close();
+	// now we rewrite the file
+	for (auto& q : questions)
+	{
+		if (q.level==level)
+		{
+			AddQuestionToFile(q);
+		}
+	}
+}
 
+void AddQuestionToList(Question q)
+{
+	questions.emplace_back(q);
 }
 
 void stringToLower(string& s)
@@ -290,7 +306,7 @@ Question GetQuestionFromInput()
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
 	q.id = to_string(rand());
-	//questions.emplace_back(q);
+	AddQuestionToList(q);
 	return q;
 }
 

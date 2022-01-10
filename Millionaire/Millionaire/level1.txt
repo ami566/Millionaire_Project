@@ -1,6 +1,6 @@
-1|Geography|Which is the capital of Brazil?|Brazil&Rio de Janeiro&Sao Paulo&Buenos Aires|Brazil
 25906|Geography|Lisbon is the capital city of:|Portugal&Spain&Argentina&Peru|Portugal
 23567|Science|What is the biggest planet in our solar system?|Venus&Jupiter&Saturn&Neptune|Jupiter
 35647|Science|What is the human body's largest organ?|Skin&Lungs&Heart&Liver|Skin
 67432|History|When was Bulgaria founded?|701 AD&681 AD&917 AD&885 AD|681 AD
 16669|Culture|The phrase 'bon voyage' meaning have a safe or good trip, comes from which language?|French&Russian&Spanish&Japanese|French
+1|Geography|Which is the capital of Brazil?|Brazil&Rio de Janeiro&Sao Paulo&Buenos Aires|Brazil

@@ -24,6 +24,12 @@ void FillQuestions()
 	}
 }
 
+vector<Question> Questions() 
+{
+	FillQuestions();
+	return questions;
+}
+
 void GetQuestions()
 {
 	questions.clear();

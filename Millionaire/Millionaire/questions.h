@@ -15,6 +15,8 @@ struct Question {
 
 void GetQuestions();
 
+std::vector<Question> Questions();
+
 Question* FindQuestionById(std::string id);
 
 void FillQuestions();

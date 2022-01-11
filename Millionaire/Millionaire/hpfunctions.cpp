@@ -78,7 +78,7 @@ void pressAnyKeyToContinueSimulation()
 void Play()
 {
     clearScreen();
-    cout << "Let's start";
+    Begin();
     FillQuestions();
 }
 
@@ -88,6 +88,7 @@ void Rules()
     DisplayRules();
 
     pressAnyKeyToContinueSimulation();
+    clearScreen();
     Homepage();
 }
 

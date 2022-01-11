@@ -4,4 +4,6 @@
 
 void DisplayRules();
 
+void RulesShort();
+
 #endif

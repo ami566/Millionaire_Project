@@ -3,7 +3,6 @@
 using namespace std;
 void DisplayRules()
 {
-    
     cout << "\n\t\t\tWELCOME TO 'WHO WANTS TO BE A MILLIONAIRE' - THE QUIZ GAME!\n\n"
         << "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
         << "\tGAME RULES\n\n"
@@ -24,7 +23,7 @@ void DisplayRules()
         << "\t-- 50:50 - two of the three incorrect answers are removed. The removed answers are randomly selected.\n"
         << "\t-- Phone a friend - you may speak to someone on the phone for 30 seconds to discuss the question.\n"
         << "\t-- Ask the audience - the audience votes with their keypads on their choice of answer.\n\n"
-        << "\tEach lifeline may ONLY be used ONCE during your entire game.\n\n"
+        << "\tEach lifeline can ONLY be used ONCE during your entire game.\n\n"
         << "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
         << "\tPRIZES\n\n"
         << "\tThe following lines show the number of the question and its value.\n"
@@ -38,4 +37,25 @@ void DisplayRules()
         << "\t8 - $50 000\n"
         << "\t9 - $70 000\n"
         << "\t10 - $100 000\n\n";
+}
+
+void RulesShort()
+{
+    cout << "\n\tBefore we beging, let's make sure you are familiar with the manual rules.\n\n"
+        << "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
+        << "\tQUICK GAME RULES\n\n"
+        << "\tYou must answer 10 multiple-choice questions correctly in order to win the big prize - $100 000.\n\n"
+        << "\tThe questions are with increasing difficulty. You can quit at any time, earning the prize of the \n"
+        << "\tprevious question. If you give a wrong answer, your earnings fall back to the last guarantee point\n"
+        << "\tand you lose the game.\n\n"
+        << "\tAt any point, you may use up one (or more) of your three 'lifelines'. They are:\n"
+        << "\t-- 50:50  --            --  Phone a friend  --         -- Ask the audience --\n"
+        << "\tEach lifeline can ONLY be used ONCE during your entire game.\n\n"
+        << "\tThe following lines show the number of the question and the money you can win if you give right answer.\n\n"
+        << "\t1 - $500                                 6 - $15 000\n"
+        << "\t2 - $1 500                               7 - $25 000 (second 'guarantee point')\n"
+        << "\t3 - $3 000                               8 - $50 000\n"
+        << "\t4 - $5 000 (first 'guarantee point')     9 - $70 000 \n   "
+        << "\t5 - $10 000                              10 - $100 000\n\n";
+       
 }

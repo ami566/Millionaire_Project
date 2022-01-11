@@ -29,6 +29,8 @@ void DisplayQuestions(std::string keyword);
 
 void EditQ(Question q);
 
+void DeleteQuestion(Question q, char c);
+
 void PrintQ(Question q);
 
 void PrintWholeQ(Question q);

@@ -134,13 +134,13 @@ void EditQuestionHome()
         InvalidInput();
         EditQuestionHome();
     }
-    cout << "\n Type the ID of the question you would like to edit: ";
+    cout << "\n  Type the ID of the question you would like to edit: ";
     
     string id;
     cin >> id;
     while (FindQuestionById(id)==NULL)
     {
-        cout << "Invalid ID! Please type it again: ";
+        cout << "  \aInvalid ID! Please type it again: ";
         cin >> id;
     }
     EditQuestion(*(FindQuestionById(id)));
@@ -154,8 +154,43 @@ void EditQuestion(Question q)
     cout << "\n\t\t\t\t\t   This is the question of your choice: \n";
     PrintWholeQ(q);
     cout<< "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
-    EditQ(q);
 
+    cout << "\n\tDo you want to delete or edit the question? \n"
+        << "\tType 'd' or 'D' for 'delete' and 'e'  or 'E' for 'edit': ";
+    char input;
+    cin >> input;
+    while (input != 'D'&& input != 'd' && input != 'e' && input != 'E')
+    {
+        cout << "\t\aInvalid input! Please type your choice again: ";
+        cin >> input;
+    }
+
+    switch (input)
+    {
+    case 'D':
+    case 'd':
+        cout << "\n\tAre you sure you want to delete this question?\n "
+            << "\tType 'y' for 'yes' and 'n' for 'no': ";
+        cin >> input;
+        while (input != 'y' && input != 'n')
+        {
+            cout << "\t\aInvalid input! Please type your choice again: ";
+            cin >> input;
+        }
+        
+        if (input == 'y')
+        {
+            DeleteQuestion(q, 'j'); // we want to delete the question from the file
+            clearScreen();
+            cout << "\n\n\tThe question was succesfully deleted!\n";
+        }
+        else   
+            EditQuestion(q);
+        break;
+    case 'E':
+    case 'e':
+        EditQ(q);
+    }
     pressAnyKeyToContinueSimulation();
     clearScreen();
     Homepage();
@@ -164,5 +199,5 @@ void EditQuestion(Question q)
 void InvalidInput() 
 {
     clearScreen();
-    cout << "\n  Invalid input! Please try typing your choice again! \n\n";
+    cout << "\n\a  Invalid input! Please try typing your choice again! \n\n";
 }

@@ -110,17 +110,7 @@ void AddQuestionToFile(Question q)
 
 void EditQ(Question q)
 {
-	int index = 0;
-	for (auto& item : questions)
-	{
-		if (item.id==q.id)
-		{
-			break;
-		}
-		index++;
-	}
-
-	questions.erase(questions.begin()+index);
+	DeleteQuestion(q, ' ');
 
 	string input;
 	
@@ -176,6 +166,29 @@ void EditQ(Question q)
 	}
 	AddQuestionToList(q);
 	RewriteFile(q.level);
+}
+
+// if the DeleteQuestion() function is called with any char c, but white space,
+// that means deletion of the question to both the questions list and the file it's stored, is needed
+void DeleteQuestion(Question q, char c)
+{
+	int index = 0;
+	for (auto& item : questions)
+	{
+		if (item.id == q.id)
+		{
+			break;
+		}
+		index++;
+	}
+	string level = q.level;
+	questions.erase(questions.begin() + index);
+
+	if (c != ' ')
+	{
+		RewriteFile(level);
+	}
+	
 }
 
 void RewriteFile(string level)

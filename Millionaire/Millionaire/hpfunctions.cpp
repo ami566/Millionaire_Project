@@ -3,6 +3,7 @@
 #include "hpfunctions.h"
 #include "rules.h"
 #include "questions.h"
+#include "game.h"
 #include <iomanip>
 #include <string>
 using namespace std;
@@ -180,9 +181,9 @@ void EditQuestion(Question q)
         
         if (input == 'y')
         {
-            DeleteQuestion(q, 'j'); // we want to delete the question from the file
+            DeleteQuestion(q, 'j'); // we want to delete the question from the file so we give a random value different from white space for the second parameter
             clearScreen();
-            cout << "\n\n\tThe question was succesfully deleted!\n";
+            cout << "\n\n\tThe question was succesfully deleted!\n\n";
         }
         else   
             EditQuestion(q);

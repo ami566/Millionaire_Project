@@ -8,13 +8,14 @@ using namespace std;
 
 string categoryOfCurrentGame;
 
+// it works for only positive numbers, since we don't need negative ones
 int ConvertStringToInt(string str)
 {
 	int number = 0; 
 	int multBy10 = 1;
 	for (int i = str.size()-1; i >= 0; i--)
 	{
-		if (str[i] <= 48 || str[i] > 57)
+		if (str[i] < 48 || str[i] > 57)
 		{
 			return -1;
 		}
@@ -49,15 +50,18 @@ void Begin()
 
 	if (input=="M")
 	{
-		clearScreen();
-		Homepage();
+		GoBackToMain();
 	}
 
 	int categoryNum = ConvertStringToInt(input);
-	while(categoryNum ==-1 || categoryNum >categories.size()+1)
+	while(categoryNum <= 0 || categoryNum >categories.size()+1 )
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
 		cin >> input;
+		if (input == "M")
+		{
+			GoBackToMain();
+		}
 		categoryNum = ConvertStringToInt(input);
 	}
 
@@ -73,4 +77,9 @@ void Begin()
 	clearScreen();
 	RulesShort();
 	pressAnyKeyToContinueSimulation();
+}
+
+void NewGame()
+{
+
 }

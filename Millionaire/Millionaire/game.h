@@ -6,5 +6,6 @@
 
 void Begin();
 int ConvertStringToInt(std::string str);
+void NewGame();
 
 #endif

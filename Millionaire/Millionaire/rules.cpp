@@ -41,7 +41,7 @@ void DisplayRules()
 
 void RulesShort()
 {
-    cout << "\n\tBefore we beging, let's make sure you are familiar with the manual rules.\n\n"
+    cout << "\n\tBefore we begin, let's make sure you are familiar with the manual rules.\n\n"
         << "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
         << "\tQUICK GAME RULES\n\n"
         << "\tYou must answer 10 multiple-choice questions correctly in order to win the big prize - $100 000.\n\n"

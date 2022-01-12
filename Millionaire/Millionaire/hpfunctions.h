@@ -22,4 +22,6 @@ void EditQuestionHome();
 
 void InvalidInput();
 
+void GoBackToMain();
+
 #endif

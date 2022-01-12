@@ -88,8 +88,7 @@ void Rules()
     DisplayRules();
 
     pressAnyKeyToContinueSimulation();
-    clearScreen();
-    Homepage();
+    GoBackToMain();
 }
 
 void AddQuestion()
@@ -99,8 +98,7 @@ void AddQuestion()
     AddQuestionToFile(GetQuestionFromInput());
     cout << endl;
     pressAnyKeyToContinueSimulation();
-    clearScreen();
-    Homepage();
+    GoBackToMain();
 }
 
 void EditQuestionHome()
@@ -194,12 +192,17 @@ void EditQuestion(Question q)
         EditQ(q);
     }
     pressAnyKeyToContinueSimulation();
-    clearScreen();
-    Homepage();
+    GoBackToMain();
 }
 
 void InvalidInput() 
 {
     clearScreen();
     cout << "\n\a  Invalid input! Please try typing your choice again! \n\n";
+}
+
+void GoBackToMain()
+{
+    clearScreen();
+    Homepage();
 }

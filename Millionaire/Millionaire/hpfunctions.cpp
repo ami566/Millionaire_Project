@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "hpfunctions.h"
+#include "manual_functions.h"
 #include "rules.h"
 #include "questions.h"
 #include "game.h"
@@ -45,34 +46,6 @@ void Homepage()
         Homepage();
         break;
     }
-}
-
-void clearScreen()
-{
-#ifdef _WIN32
-    system("cls");
-#elif __linux__
-    system("clear");
-#else
-    for (int i = 0; i <= 1000; i++)
-    {
-        cout << endl;
-    }
-#endif
-}
-
-void pressAnyKeyToContinueSimulation()
-{
-#ifdef _WIN32
-    system("pause");
-#elif __linux__
-    system("read");
-#else
-    cout << "Press any key and then the 'Enter' key to continue . . .";
-    string n; 
-    cin >> n;
-
-#endif
 }
 
 void Play()

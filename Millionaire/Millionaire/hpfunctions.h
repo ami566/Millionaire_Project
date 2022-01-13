@@ -6,10 +6,6 @@
 
 void Homepage();
 
-void pressAnyKeyToContinueSimulation();
-
-void clearScreen();
-
 void Play();
 
 void Rules();

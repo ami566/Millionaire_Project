@@ -1,17 +1,18 @@
 #include "questions.h"
+#include "manual_functions.h"
+#include "game.h"
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <fstream>
 #include <string>
 #include <stdlib.h> 
 #include <stdio.h>
 #include <time.h> 
-//#include <boost/algorithm/string.hpp>
+
 
 using namespace std;
 
-vector<Question> questions ;
+vector<Question> questions;
 string filename;
 
 void FillQuestions()
@@ -213,17 +214,6 @@ void AddQuestionToList(Question q)
 	questions.emplace_back(q);
 }
 
-void stringToLower(string& s)
-{
-	transform(s.begin(), s.end(), s.begin(), ::tolower);
-}
-
-string returnStringToLower(std::string s)
-{
-	transform(s.begin(), s.end(), s.begin(), ::tolower);
-	return s;
-}
-
 void DisplayQuestions(string keyword)
 {
 	FillQuestions();
@@ -347,3 +337,42 @@ vector<string> GetCategories()
 	}
 	return categories;
 }
+
+//vector<Question> QuestionsForGame(string category)
+//{
+//	int qPerLevel[10] = { 0,0,0,0,0,0,0,0,0,0 }; // in this array we will see how many questions available are there per level
+//	vector<string> qIds;
+//	Question q;
+//
+//	for (int i = 0; i < questions.size(); i++)
+//	{
+//		q = questions[i];
+//		if (q.category == category)
+//		{
+//			qIds.emplace_back(q.id);
+//			qPerLevel[ConvertStringToInt(q.level) - 1] += 1;
+//		}
+//	}
+//
+//	// with this loop we check if there are levels with zero questions 
+//	// (which means there aren't questions from this category for that level)
+//	// and if there is one (or more) found, then we get the rest of the 
+//	// questions for the same level but from different category
+//	for (int i = 0; i < 10; i++)
+//	{
+//		if (qPerLevel[i] == 0)
+//		{
+//			for (int j = 0; j < questions.size(); j++)
+//			{
+//				q = questions[j];
+//				if (ConvertStringToInt(q.level) - 1 == i)
+//				{
+//					qIds.emplace_back(q.id);
+//					qPerLevel[i] += 1;
+//				}
+//			}
+//		}
+//	}
+//
+//
+//}

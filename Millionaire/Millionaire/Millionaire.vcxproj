@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="manual_functions.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hpfunctions.cpp" />
     <ClCompile Include="questions.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="manual_functions.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="hpfunctions.h" />
     <ClInclude Include="questions.h" />

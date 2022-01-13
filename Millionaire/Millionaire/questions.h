@@ -37,10 +37,6 @@ void PrintWholeQ(Question q);
 
 void RewriteFile(std::string fileNum);
 
-std::string returnStringToLower(std::string s);
-
-void stringToLower(std::string &s);
-
 Question GetQuestionFromInput();
 
 std::vector<std::string> GetCategories();

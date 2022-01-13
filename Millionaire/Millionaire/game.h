@@ -5,7 +5,7 @@
 #include <vector>
 
 void Begin();
-int ConvertStringToInt(std::string str);
 void NewGame();
+void GetQuestionsForCurrentGame();
 
 #endif

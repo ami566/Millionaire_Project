@@ -13,6 +13,14 @@ struct Question {
 	std::vector<std::string> answers;
 };
 
+struct QuestionsList {
+	std::vector<Question> list;
+	std::string category;
+
+	// in this array we will see how many questions available are there per level
+	int qPerLevel[10] = { 0,0,0,0,0,0,0,0,0,0 };
+};
+
 void GetQuestions();
 
 std::vector<Question> Questions();
@@ -41,4 +49,5 @@ Question GetQuestionFromInput();
 
 std::vector<std::string> GetCategories();
 
+QuestionsList QuestionsForGame(std::string category);
 #endif	

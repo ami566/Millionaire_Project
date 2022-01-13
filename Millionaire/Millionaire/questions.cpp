@@ -338,41 +338,43 @@ vector<string> GetCategories()
 	return categories;
 }
 
-//vector<Question> QuestionsForGame(string category)
-//{
-//	int qPerLevel[10] = { 0,0,0,0,0,0,0,0,0,0 }; // in this array we will see how many questions available are there per level
-//	vector<string> qIds;
-//	Question q;
-//
-//	for (int i = 0; i < questions.size(); i++)
-//	{
-//		q = questions[i];
-//		if (q.category == category)
-//		{
-//			qIds.emplace_back(q.id);
-//			qPerLevel[ConvertStringToInt(q.level) - 1] += 1;
-//		}
-//	}
-//
-//	// with this loop we check if there are levels with zero questions 
-//	// (which means there aren't questions from this category for that level)
-//	// and if there is one (or more) found, then we get the rest of the 
-//	// questions for the same level but from different category
-//	for (int i = 0; i < 10; i++)
-//	{
-//		if (qPerLevel[i] == 0)
-//		{
-//			for (int j = 0; j < questions.size(); j++)
-//			{
-//				q = questions[j];
-//				if (ConvertStringToInt(q.level) - 1 == i)
-//				{
-//					qIds.emplace_back(q.id);
-//					qPerLevel[i] += 1;
-//				}
-//			}
-//		}
-//	}
-//
-//
-//}
+QuestionsList QuestionsForGame(string category)
+{
+	FillQuestions();
+	QuestionsList qList;
+	Question q;
+	qList.category = category;
+
+	for (int i = 0; i < questions.size(); i++)
+	{
+		q = questions[i];
+		if (q.category == category)
+		{
+			qList.list.emplace_back(q);
+			qList.qPerLevel[ConvertStringToInt(q.level) - 1] += 1;
+		}
+	}
+
+	// with this loop we check if there are levels with zero questions 
+	// (which means there aren't questions from this category for that level)
+	// and if there is one (or more) found, then we get the rest of the 
+	// questions for the same level but from different category
+	for (int i = 0; i < 10; i++)
+	{
+		if (qList.qPerLevel[i] == 0)
+		{
+			for (int j = 0; j < questions.size(); j++)
+			{
+				q = questions[j];
+				if (ConvertStringToInt(q.level) - 1 == i)
+				{
+					qList.list.emplace_back(q);
+					qList.qPerLevel[i] += 1;
+				}
+			}
+		}
+	}
+
+	return qList;
+}
+

@@ -7,10 +7,9 @@
 #include <vector>
 using namespace std;
 
-string categGame; // categogy of current game
-//vector<Question> questions; // questions for current game
-
-
+string categGame; // category of current game
+//vector<string> qIds; // questions for current game
+//Question qForLevel;
 
 void Begin()
 {
@@ -73,46 +72,5 @@ void NewGame()
 
 void GetQuestionsForCurrentGame()
 {
-	//questions.clear();
-	//int qPerLevel[10] = { 0,0,0,0,0,0,0,0,0,0 }; // in this array we will see how many questions available are there per level
-	//
-	//
-	//if (categGame == "All" )
-	//{
-	//	questions = Questions();
-	//}
-
-	//Question q;
-
-	//// with this loop we get all the questions with the chosen category for the game
-	//for (int i = 0; i < questions.size(); i++)
-	//{
-	//	q = Questions()[i];
-	//	if (q.category == categGame)
-	//	{
-	//		questions.emplace_back(q);
-	//		qPerLevel[ConvertStringToInt(q.level) - 1] += 1;
-	//	}
-	//}
-
-	// with this loop we check if there are levels with zero questions 
-	// (which means there aren't questions from this category for that level)
-	// and if there is one (or more) found, then we get the rest of the 
-	// questions for the same level but from different category
-	/*for (int i = 0; i < 10; i++)
-	{
-		if (qPerLevel[i] == 0)
-		{
-			for (int j = 0; j < allQ.size(); j++)
-			{
-			    q = allQ[j];
-				if (ConvertStringToInt(q.level) - 1 == i)
-				{
-					questions.emplace_back(q);
-					qPerLevel[i] += 1;
-				}
-			}
-		}
-	}*/
-
+	QuestionsForGame(categGame);
 }

@@ -58,3 +58,10 @@ void pressAnyKeyToContinueSimulation()
 
 #endif
 }
+
+void SwapStrings(string& a, string& b)
+{
+	string c = a;
+	a = b;
+	b = c;
+}

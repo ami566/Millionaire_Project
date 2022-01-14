@@ -13,4 +13,6 @@ void pressAnyKeyToContinueSimulation();
 
 void clearScreen();
 
+void SwapStrings(std::string& a, std::string& b);
+
 #endif

@@ -128,6 +128,7 @@ void MainPart(Question& q)
 	string D = q.answers[3];
 	cout << "\tA) " << A << "                 B) " << B << endl
 		<< "\tC) " << C << "                 D) " << D << endl;
+
 	
 }
 
@@ -141,4 +142,71 @@ void ShuffleAnswers(Question& q)
 	randomN = (rand() % 2);
 	SwapStrings(q.answers[1], q.answers[randomN]);
 
+}
+
+void Lifeline50(Question& q)
+{
+	int indexOfRightAnswer = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (q.answers[i] == q.rigthAnswer)
+		{
+			indexOfRightAnswer = i;
+			break;
+		}
+	}
+
+	srand((unsigned)time(NULL));
+	int randomN = (rand() % 4);
+	if (randomN == indexOfRightAnswer)
+	{
+		if (randomN == 0)
+		{
+			q.answers[3] = "";
+		}
+		else
+		{
+			q.answers[randomN - 1] = "";
+		}
+	}
+	else
+	{
+		q.answers[randomN] = "";
+	}
+
+	randomN = (rand() % 4);
+	if (randomN == indexOfRightAnswer)
+	{
+		if (randomN == 0)
+		{
+			if (q.answers[3] != "")
+			{
+				q.answers[3] = "";
+			}
+			else
+			{
+				q.answers[1] = "";
+			}
+			
+		}
+		else
+		{
+			if (q.answers[randomN - 1] != "")
+			{
+				q.answers[randomN - 1] = "";
+			}
+			else if (randomN == 3)
+			{
+				q.answers[0] = "";
+			}
+			else
+			{
+				q.answers[randomN + 1] = "";
+			}
+		}
+	}
+	else
+	{
+		q.answers[randomN] = "";
+	}
 }

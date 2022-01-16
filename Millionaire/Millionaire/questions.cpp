@@ -292,7 +292,7 @@ Question GetQuestionFromInput()
 	cout << "\n\n  Category: ";
 	cin.ignore();
 	getline(cin, q.category);
-	cout << "  Difficulty level: ";
+	cout << "  Difficulty level (1 - 10): ";
 	getline(cin, q.level);
 	cout << "  Question: ";
 	getline(cin, q.body);

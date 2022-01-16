@@ -14,5 +14,10 @@ void Heading();
 void ShuffleAnswers(Question& q);
 void MainPart(Question& q);
 void Lifeline50(Question& q);
+void LifelineCallAFriend(Question& q);
+void LifelineAskAudience(Question& q);
+
+// for 'Call a friend' and 'Ask Audience' lifelines
+int IndexOfAnswerForLifeline(Question& q);
 
 #endif

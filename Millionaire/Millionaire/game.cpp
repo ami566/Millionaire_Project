@@ -157,21 +157,22 @@ void Lifeline50(Question& q)
 	}
 
 	srand((unsigned)time(NULL));
+	string empty = "";
 	int randomN = (rand() % 4);
 	if (randomN == indexOfRightAnswer)
 	{
 		if (randomN == 0)
 		{
-			q.answers[3] = "";
+			q.answers[3] = empty;
 		}
 		else
 		{
-			q.answers[randomN - 1] = "";
+			q.answers[randomN - 1] = empty;
 		}
 	}
 	else
 	{
-		q.answers[randomN] = "";
+		q.answers[randomN] = empty;
 	}
 
 	randomN = (rand() % 4);
@@ -179,34 +180,63 @@ void Lifeline50(Question& q)
 	{
 		if (randomN == 0)
 		{
-			if (q.answers[3] != "")
+			if (q.answers[3] != empty)
 			{
-				q.answers[3] = "";
+				q.answers[3] = empty;
 			}
 			else
 			{
-				q.answers[1] = "";
+				q.answers[1] = empty;
 			}
 			
 		}
 		else
 		{
-			if (q.answers[randomN - 1] != "")
+			if (q.answers[randomN - 1] != empty)
 			{
-				q.answers[randomN - 1] = "";
+				q.answers[randomN - 1] = empty;
 			}
 			else if (randomN == 3)
 			{
-				q.answers[0] = "";
+				q.answers[0] = empty;
 			}
 			else
 			{
-				q.answers[randomN + 1] = "";
+				q.answers[randomN + 1] = empty;
+			}
+		}
+	}
+	else if (q.answers[randomN] == empty)
+	{
+		if (randomN == 0)
+		{
+			if (indexOfRightAnswer != 3)
+			{
+				q.answers[3] = empty;
+			}
+			else
+			{
+				q.answers[1] = empty;
+			}
+		}
+		else
+		{
+			if (randomN - 1 != indexOfRightAnswer)
+			{
+				q.answers[randomN - 1] = empty;
+			}
+			else if (randomN == 3)
+			{
+				q.answers[0] = empty;
+			}
+			else
+			{
+				q.answers[randomN + 1] = empty;
 			}
 		}
 	}
 	else
 	{
-		q.answers[randomN] = "";
+		q.answers[randomN] = empty;
 	}
 }

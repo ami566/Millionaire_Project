@@ -13,5 +13,6 @@ Question GetQuestionForLevel();
 void Heading();
 void ShuffleAnswers(Question& q);
 void MainPart(Question& q);
+void Lifeline50(Question& q);
 
 #endif

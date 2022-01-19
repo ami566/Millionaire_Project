@@ -14,10 +14,13 @@ void Heading();
 void ShuffleAnswers(Question& q);
 void MainPart(Question& q);
 void Lifeline50(Question& q);
-void LifelineCallAFriend(Question& q);
+void LifelinePhoneAFriend(Question& q);
 void LifelineAskAudience(Question& q);
-
+void DisplayQ(Question& q);
 // for 'Call a friend' and 'Ask Audience' lifelines
 int IndexOfAnswerForLifeline(Question& q);
+void ChooseLifeline();
+void QuitGame();
+void End();
 
 #endif

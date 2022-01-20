@@ -61,10 +61,10 @@ void Begin()
 		game.category = categories[categoryNum-1];
 	}
 
-	game.level = 1;
+	/*game.level = 1;
 	game.life50 = true;
 	game.lifeFriend = true;
-	game.lifeAudience = true;
+	game.lifeAudience = true;*/
 	
 	clearScreen();
 	RulesShort();
@@ -78,6 +78,7 @@ void NewGame(Game& g)
 {
 	g.question = GetQuestionForLevel(g);
 	ShuffleAnswers(g.question);
+	g.lifeline = " ";
 	MainPart(g);
 }
 
@@ -148,6 +149,8 @@ void MainPart(Game& g)
 	{
 		GiveAnswer(g);
 	}
+
+	//g.lifeline = " ";
 }
 
 void GiveAnswer(Game& g)
@@ -174,7 +177,7 @@ void GiveAnswer(Game& g)
 		rightAnswer = "D";
 	}
 	
-	string print = "Choose your answer(";
+	string print = "\n\tChoose your answer(";
 
 	if (q.answers[0] != "")
 	{
@@ -204,9 +207,58 @@ void GiveAnswer(Game& g)
 
 	if (input == rightAnswer)
 	{
-
+		NextLevel(g);
+	}
+	else if (input == "0")
+	{
+		clearScreen();
+		MainPart(g);
+	}
+	else
+	{
+		LostGame(g, rightAnswer);
 	}
 
+}
+
+void LostGame(Game& g, string rightAnswer)
+{
+	clearScreen();
+	cout << "\n\n\t\t\tWrong answer! Sorry, you lost the game!\n\n"
+		<< "\t\tThe right answer was " << rightAnswer << ") " << g.question.rigthAnswer << ".\n\n"
+		<< "\t\tYour earnings are: $" << g.wonMoney << "!\n\n";
+	pressAnyKeyToContinueSimulation();
+	clearScreen();
+	Homepage();
+}
+
+void NextLevel(Game& g)
+{
+	// the player is sure to get the first guarantee sum when passed level 4
+	if (g.level == 4)
+	{
+		g.wonMoney = g.prizes[g.level - 1];
+	}
+
+	// the player is sure to get the second guarantee sum when passed level 7
+	if (g.level == 7)
+	{
+		g.wonMoney = g.prizes[g.level - 1];
+	}
+
+	// if the 10th levevl is successfully passed, the player gets the big prize and the game ends
+	if (g.level == 10)
+	{
+		g.wonMoney = g.prizes[g.level - 1];
+		End(g);
+	}
+
+	clearScreen();
+	cout << "\n\n\t\t\tCongratulations! You won $" << g.prizes[g.level - 1] << "!\n\n";
+	g.level++;
+	pressAnyKeyToContinueSimulation();
+	clearScreen();
+	NewGame(g);
 }
 
 void DisplayQ(Game& g)
@@ -582,6 +634,7 @@ void QuitGame(Game& g)
 
 void End(Game& g) 
 {
+	clearScreen();
 	if (g.wonMoney == 100000)
 	{
 		cout << "\n\n\t\t\tCONGRATULATIONS!!!! " << g.player << ", you are the BIG WINNER!"
@@ -595,8 +648,8 @@ void End(Game& g)
 	}
 	else
 	{ 
-		cout << "\n\n\t\t\tCongratulations, " << g.player << "!"
-			<< "\n\t\t\t You've won $" << g.wonMoney << "!\n\n";
+		cout << "\n\n\t\t\tCongratulations, " << g.player << "! It was a great game!"
+			<< "\n\t\t\t You've won $" << g.prizes[g.level - 2] << "!\n\n";
 	}
 
 	pressAnyKeyToContinueSimulation();

@@ -15,7 +15,7 @@ void Homepage()
     cout << "\n\n\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
         << "\t\t\tWHO WANTS TO BE A MILLIONAIRE\n" 
         << "\n\t\t\t  A quiz game presented to you by Amira Emin\n"
-        "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+        "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     // cout.setf(ios::internal);
     //cout.width(100);
     cout << "\n\n\t\t1. New Game";
@@ -23,7 +23,7 @@ void Homepage()
     cout << "\n\n\t\t3. Add new question";
     cout << "\n\n\t\t4. Edit an existing question";
     cout << "\n\n\t\t5. Exit";
-    cout << "\n\nEnter your choice (1 - 5): ";
+    cout << "\n\n\t\tEnter your choice (1 - 5): ";
     cin >> option;
 
     switch (option)

@@ -12,27 +12,27 @@
 
 using namespace std;
 
-vector<Question> questions;
+//vector<Question> questions;
 
-void FillQuestions()
-{
-	// checks if the questions vector is empty and if it is, we populate it with the questions from the text files
-	// the questions vector can already contain elements if we have called the GetQuestions function previously during the program
-	if (questions.empty())
-	{
-		GetQuestions();
-	}
-}
+//void FillQuestions()
+//{
+//	// checks if the questions vector is empty and if it is, we populate it with the questions from the text files
+//	// the questions vector can already contain elements if we have called the GetQuestions function previously during the program
+//	if (questions.empty())
+//	{
+//		GetQuestions();
+//	}
+//}
 
-vector<Question> Questions() 
-{
-	FillQuestions();
-	return questions;
-}
+//vector<Question> Questions() 
+//{
+//	FillQuestions();
+//	return questions;
+//}
 
-void GetQuestions()
+vector<Question> GetQuestions()
 {
-	questions.clear();
+	vector<Question> questions;
 	string buffer;
 	
 	for (int i = 1; i <= 10; i++)
@@ -83,11 +83,12 @@ void GetQuestions()
 				{
 					q.rigthAnswer += buffer[j++];
 				}
-				AddQuestionToList(q); // adds the question to the questions list
+				AddQuestionToList(questions, q); // adds the question to the questions list
 			}
 		}
 		myFile.close();
 	}
+	return questions;
 }
 
 void AddQuestionToFile(Question q)
@@ -108,9 +109,9 @@ void AddQuestionToFile(Question q)
 	file.close();
 }
 
-void EditQ(Question q)
+void EditQ(vector<Question>& questions, Question q)
 {
-	DeleteQuestion(q, ' ');
+	DeleteQuestion(questions, q, ' ');
 
 	string input;
 	
@@ -164,13 +165,13 @@ void EditQ(Question q)
 	{
 		q.rigthAnswer = input;
 	}
-	AddQuestionToList(q);
-	RewriteFile(q.level);
+	AddQuestionToList(questions, q);
+	RewriteFile(questions, q.level);
 }
 
 // if the DeleteQuestion() function is called with any char c, but white space,
 // that means deletion of the question to both the questions list and the file it's stored, is needed
-void DeleteQuestion(Question q, char c)
+void DeleteQuestion(vector<Question>& questions, Question q, char c)
 {
 	int index = 0;
 	for (auto& item : questions)
@@ -186,12 +187,12 @@ void DeleteQuestion(Question q, char c)
 
 	if (c != ' ')
 	{
-		RewriteFile(level);
+		RewriteFile(questions, level);
 	}
 	
 }
 
-void RewriteFile(string level)
+void RewriteFile(vector<Question>& questions, string level)
 {
 	string filename = "level" + level + ".txt";
 	// we open the text file with the trunc option and then close it to delete its contents
@@ -208,15 +209,13 @@ void RewriteFile(string level)
 	}
 }
 
-void AddQuestionToList(Question q)
+void AddQuestionToList(vector<Question>& questions, Question q)
 {
 	questions.emplace_back(q);
 }
 
-void DisplayQuestions(string keyword)
-{
-	FillQuestions();
-	
+void DisplayQuestions(vector<Question>& questions, string keyword)
+{	
 	if (keyword == "")
 	{
 		for (auto& q : questions)
@@ -263,7 +262,7 @@ void PrintWholeQ(Question q)
 		<< "\t  Right answer: " << q.rigthAnswer << endl;
 }
 
-Question* FindQuestionById(string id)
+Question* FindQuestionById(vector<Question>& questions, string id)
 {
 	for (auto& q : questions)
 	{
@@ -275,7 +274,7 @@ Question* FindQuestionById(string id)
 	return  NULL;
 }
 
-Question GetQuestionFromInput()
+Question GetQuestionFromInput(vector<Question>& questions)
 {
 	srand(static_cast<unsigned int>(time(nullptr)));
 	string answer;
@@ -284,7 +283,7 @@ Question GetQuestionFromInput()
 	     << "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n";
 
 	cout << "  Choose from the already available categories or type a new one:\n   | ";
-	for (auto& item : GetCategories())
+	for (auto& item : GetCategories(questions))
 	{
 		cout << item << " | ";
 	}
@@ -308,14 +307,12 @@ Question GetQuestionFromInput()
 	getline(cin, answer);
 	q.answers.emplace_back(answer);
 	q.id = to_string(rand());
-	AddQuestionToList(q);
+	AddQuestionToList(questions, q);
 	return q;
 }
 
-vector<string> GetCategories()
+vector<string> GetCategories(vector<Question>& questions)
 {
-	FillQuestions();
-
 	vector<string> categories;
 	bool containsCategory = false;
 	for (auto& q : questions)
@@ -337,9 +334,8 @@ vector<string> GetCategories()
 	return categories;
 }
 
-QuestionsList QuestionsForGame(string category)
+QuestionsList QuestionsForGame(vector<Question>& questions, string category)
 {
-	FillQuestions();
 	QuestionsList qList;
 	Question q;
 	qList.category = category;

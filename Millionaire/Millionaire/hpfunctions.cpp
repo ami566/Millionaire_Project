@@ -11,6 +11,7 @@ using namespace std;
 
 void Homepage()
 {
+    vector<Question> questions = GetQuestions();
     int option;
     cout << "\n\n\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
         << "\t\t\tWHO WANTS TO BE A MILLIONAIRE\n" 
@@ -29,17 +30,17 @@ void Homepage()
     switch (option)
     {
     case 1: 
-        Play();
+        Play(questions);
         break;
     case 2: 
         Rules();
         break;
     case 3: 
-        AddQuestion();
+        AddQuestion(questions);
         break;
     case 4: 
         clearScreen();
-        EditQuestionHome();
+        EditQuestionHome(questions);
         break;
     case 5: 
         return;
@@ -50,11 +51,10 @@ void Homepage()
     }
 }
 
-void Play()
+void Play(vector<Question>& questions)
 {
     clearScreen();
-    Begin();
-    FillQuestions();
+    Begin(questions);
 }
 
 void Rules()
@@ -66,17 +66,17 @@ void Rules()
     GoBackToMain();
 }
 
-void AddQuestion()
+void AddQuestion(vector<Question>& questions)
 {
     clearScreen();
     cout << "\n   ADD NEW QUESTION FORM\n";
-    AddQuestionToFile(GetQuestionFromInput());
+    AddQuestionToFile(GetQuestionFromInput(questions));
     cout << endl;
     pressAnyKeyToContinueSimulation();
     GoBackToMain();
 }
 
-void EditQuestionHome()
+void EditQuestionHome(vector<Question>& questions)
 {
     cout << "\n   CHOOSE QUESTION TO EDIT\n";
     
@@ -93,7 +93,7 @@ void EditQuestionHome()
     if (opt == "a")
     {
         cout << "\n   All questions are being displayed.\n\n";
-        DisplayQuestions("");
+        DisplayQuestions(questions, "");
     }
     else if (opt == "s")
     {
@@ -102,26 +102,26 @@ void EditQuestionHome()
         cin.ignore();
         getline(cin, keyword);
         cout << "\n   Questions that contain the keyword in their category, body, or in their answers are being displayed.\n\n";
-        DisplayQuestions(keyword);
+        DisplayQuestions(questions, keyword);
     }
     else
     {
         InvalidInput();
-        EditQuestionHome();
+        EditQuestionHome(questions);
     }
     cout << "\n  Type the ID of the question you would like to edit: ";
     
     string id;
     cin >> id;
-    while (FindQuestionById(id)==NULL)
+    while (FindQuestionById(questions, id)==NULL)
     {
         cout << "  \aInvalid ID! Please type it again: ";
         cin >> id;
     }
-    EditQuestion(*(FindQuestionById(id)));
+    EditQuestion(questions, *(FindQuestionById(questions, id)));
 }
 
-void EditQuestion(Question q)
+void EditQuestion(vector<Question>& questions, Question q)
 { 
     clearScreen();
     cout << "\n\t\t\t\t\t\t   EDIT QUESTION FORM\n"
@@ -155,16 +155,16 @@ void EditQuestion(Question q)
         
         if (input == 'y')
         {
-            DeleteQuestion(q, 'j'); // we want to delete the question from the file so we give a random value different from white space for the second parameter
+            DeleteQuestion(questions, q, 'j'); // we want to delete the question from the file so we give a random value different from white space for the second parameter
             clearScreen();
             cout << "\n\n\tThe question was succesfully deleted!\n\n";
         }
         else   
-            EditQuestion(q);
+            EditQuestion(questions, q);
         break;
     case 'E':
     case 'e':
-        EditQ(q);
+        EditQ(questions, q);
     }
     pressAnyKeyToContinueSimulation();
     GoBackToMain();

@@ -6,15 +6,15 @@
 
 void Homepage();
 
-void Play();
+void Play(std::vector<Question>& questions);
 
 void Rules();
 
-void AddQuestion();
+void AddQuestion(std::vector<Question>& questions);
 
-void EditQuestion(Question q);
+void EditQuestion(std::vector<Question>& questions, Question q);
 
-void EditQuestionHome();
+void EditQuestionHome(std::vector<Question>& questions);
 
 void InvalidInput();
 

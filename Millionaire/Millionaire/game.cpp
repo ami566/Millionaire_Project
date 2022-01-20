@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-void Begin()
+void Begin(vector<Question>& questions)
 {
 	Game game;
 	cout << "\n\n\t\t\tWELCOME TO 'WHO WANTS TO BE A MILLIONAIRE' - THE QUIZ GAME!\n\n"
@@ -18,7 +18,7 @@ void Begin()
 	getline(cin, game.player);
 	cout << "\n\n\t\t\tChoose a category to play in: \n\n";
 
-	vector<string> categories = GetCategories();
+	vector<string> categories = GetCategories(questions);
 	int i = 0;
 	for (; i < categories.size(); i++)
 	{
@@ -65,7 +65,7 @@ void Begin()
 	game.life50 = true;
 	game.lifeFriend = true;
 	game.lifeAudience = true;*/
-	
+	game.qList.list = questions;
 	clearScreen();
 	RulesShort();
 	pressAnyKeyToContinueSimulation();
@@ -84,7 +84,7 @@ void NewGame(Game& g)
 
 void GetQuestionsForCurrentGame(Game& g)
 {
-	g.qList = QuestionsForGame(g.category);
+	g.qList = QuestionsForGame(g.qList.list, g.category);
 }
 
 Question GetQuestionForLevel(Game& g)
@@ -96,7 +96,7 @@ Question GetQuestionForLevel(Game& g)
 	srand((unsigned)time(NULL));
 	int randomQ =  (rand() % qCount);
 	string qId = g.qIdsForLevel[randomQ];
-	return *FindQuestionById(qId);
+	return *FindQuestionById(g.qList.list, qId);
 }
 
 void QuestionsForLevel(Game& g)
@@ -466,6 +466,24 @@ void LifelinePhoneAFriend(Game& g)
 
 void LifelineAskAudience(Game& g)
 {
+	int index = IndexOfAnswerForLifeline(g.question);
+	string letter;
+	switch (index)
+	{
+	case 0:
+		letter = 'A';
+		break;
+	case 1:
+		letter = 'B';
+		break;
+	case 2:
+		letter = 'C';
+		break;
+	case 3:
+		letter = 'D';
+		break;
+	}
+	cout << letter;
 	g.lifeline = "";
 	g.lifeAudience = false;
 }

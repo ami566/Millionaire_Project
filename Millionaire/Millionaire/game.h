@@ -20,7 +20,7 @@ struct Game {
 	int wonMoney = 0;
 };
 
-void Begin();
+void Begin(std::vector<Question>& questions);
 void NewGame(Game& g);
 void GetQuestionsForCurrentGame(Game& g);
 void QuestionsForLevel(Game& g);

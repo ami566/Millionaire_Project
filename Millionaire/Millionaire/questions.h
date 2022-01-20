@@ -21,33 +21,33 @@ struct QuestionsList {
 	int qPerLevel[10] = { 0,0,0,0,0,0,0,0,0,0 };
 };
 
-void GetQuestions();
+//void GetQuestions();
 
-std::vector<Question> Questions();
+std::vector<Question> GetQuestions();
 
-Question* FindQuestionById(std::string id);
+Question* FindQuestionById(std::vector<Question>& questions, std::string id);
 
-void FillQuestions();
+//void FillQuestions();
 
 void AddQuestionToFile(Question q);
 
-void AddQuestionToList(Question q);
+void AddQuestionToList(std::vector<Question>& questions, Question q);
 
-void DisplayQuestions(std::string keyword);
+void DisplayQuestions(std::vector<Question>& questions, std::string keyword);
 
-void EditQ(Question q);
+void EditQ(std::vector<Question>& questions, Question q);
 
-void DeleteQuestion(Question q, char c);
+void DeleteQuestion(std::vector<Question>& questions, Question q, char c);
 
 void PrintQ(Question q);
 
 void PrintWholeQ(Question q);
 
-void RewriteFile(std::string fileNum);
+void RewriteFile(std::vector<Question>& questions, std::string fileNum);
 
-Question GetQuestionFromInput();
+Question GetQuestionFromInput(std::vector<Question>& questions);
 
-std::vector<std::string> GetCategories();
+std::vector<std::string> GetCategories(std::vector<Question>& questions);
 
-QuestionsList QuestionsForGame(std::string category);
+QuestionsList QuestionsForGame(std::vector<Question>& questions, std::string category);
 #endif	

@@ -8,27 +8,14 @@
 #include <string>
 using namespace std;
 
-string categGame;				// category of current game
-int level = 1;				    // level of current game
-vector<string> qIdsForLevel;    // questions for current level
-QuestionsList qList;
-string player;
-bool life50 = true;
-bool lifeFriend = true;
-bool lifeAudience = true;
-string lifeline = "";
-Question currQ;                 // question of a current level
-
-int prizes[] = { 500, 1500, 3000, 5000, 10000, 15000, 25000, 50000, 70000, 100000 };
-int wonMoney;
-
 void Begin()
 {
+	Game game;
 	cout << "\n\n\t\t\tWELCOME TO 'WHO WANTS TO BE A MILLIONAIRE' - THE QUIZ GAME!\n\n"
 		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
 		<< "\tHow would you like to be adressed as? (Enter a name): ";
 	cin.ignore();
-	getline(cin, player);
+	getline(cin, game.player);
 	cout << "\n\n\t\t\tChoose a category to play in: \n\n";
 
 	vector<string> categories = GetCategories();
@@ -67,115 +54,206 @@ void Begin()
 
 	if (categoryNum == i + 1)
 	{
-		categGame = "All";
+		game.category = "All";
 	}
 	else
 	{
-		categGame = categories[categoryNum-1];
+		game.category = categories[categoryNum-1];
 	}
 
-	level = 1;
-	life50 = 1;
-	lifeFriend = 1;
-	lifeAudience = 1;
+	game.level = 1;
+	game.life50 = true;
+	game.lifeFriend = true;
+	game.lifeAudience = true;
 	
 	clearScreen();
 	RulesShort();
 	pressAnyKeyToContinueSimulation();
 	clearScreen();
-	GetQuestionsForCurrentGame();
-	NewGame();
+	GetQuestionsForCurrentGame(game);
+	NewGame(game);
 }
 
-void NewGame()
+void NewGame(Game& g)
 {
-	currQ = GetQuestionForLevel();
-	ShuffleAnswers(currQ);
-	MainPart(currQ);
+	g.question = GetQuestionForLevel(g);
+	ShuffleAnswers(g.question);
+	MainPart(g);
 }
 
-void GetQuestionsForCurrentGame()
+void GetQuestionsForCurrentGame(Game& g)
 {
-	qList = QuestionsForGame(categGame);
+	g.qList = QuestionsForGame(g.category);
 }
 
-Question GetQuestionForLevel()
+Question GetQuestionForLevel(Game& g)
 {
-	int qCount = qList.qPerLevel[level - 1];
-	QuestionsForLevel();
-	/*if (qCount == 1)
-	{
-		return *FindQuestionById(qIdsForLevel[0]);
-	}*/
+	int qCount = g.qList.qPerLevel[g.level - 1];
+	QuestionsForLevel(g);
 
 	// generating random number within the range of the count of the available questions
 	srand((unsigned)time(NULL));
 	int randomQ =  (rand() % qCount);
-	string qId = qIdsForLevel[randomQ];
+	string qId = g.qIdsForLevel[randomQ];
 	return *FindQuestionById(qId);
 }
 
-void QuestionsForLevel()
+void QuestionsForLevel(Game& g)
 {
-	qIdsForLevel.clear();
-	for (auto& q : qList.list)
+	g.qIdsForLevel.clear();
+	for (auto& q : g.qList.list)
 	{
-		if (ConvertStringToInt(q.level) == level)
+		if (ConvertStringToInt(q.level) == g.level)
 		{
-			qIdsForLevel.emplace_back(q.id);
+			g.qIdsForLevel.emplace_back(q.id);
 		}
 	}
 }
 
-void Heading()
-{
-	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-		<< "\tPlayer: " << player << "          Level: " << level << "              Category : "<< categGame << "            Question for $" << prizes[level - 1] << "\n"
-		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
-}
+//void Heading()
+//{
+//	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+//		<< "\tPlayer: " << player << "          Level: " << q.level << "              Category : "<< categGame << "            Question for $" << prizes[level - 1] << "\n"
+//		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+//}
 
-void MainPart(Question& q)
+void MainPart(Game& g)
 {
-	
-	DisplayQ(q);
-	if (lifeline != "")
+	DisplayQ(g);
+
+	if (g.lifeline != "")
 	{
-		cout << lifeline;
+		cout << g.lifeline;
 	}
-    char input;
+
+    string input;
 	cout << "\n\tWhat would you like to do? (S - give an answer, "
-		<< "\tL - use a lifeline, Q - to quit the game): ";
+		<< "\n\tL - use a lifeline, Q - to quit the game): ";
 	cin >> input;
-	while (input != 'L' || input != 'Q' || input != 'S')
+	while (input != "L" && input != "Q" && input != "S")
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
 		cin >> input;
 	}
 	
-	switch (input)
+	if (input == "L")
 	{
-	case 'Q':
-		QuitGame();
-		break;
-	case 'L':
-		ChooseLifeline();
-		break;
-	case 'S':
+		ChooseLifeline(g);
+	}
+	if (input == "Q")
+	{
+		QuitGame(g);
+	}
+	if (input == "S")
+	{
+		GiveAnswer(g);
+	}
+}
 
-	default:
-		break;
+void GiveAnswer(Game& g)
+{
+	clearScreen();
+	Question& q = g.question;
+	DisplayQ(g);
+	int indexOfRightAnswer = FindIndexOfRightAnswer(q);
+	string rightAnswer;
+	if (indexOfRightAnswer == 0)
+	{
+		rightAnswer = "A";
+	}
+	if (indexOfRightAnswer == 1)
+	{
+		rightAnswer = "B";
+	}
+	if (indexOfRightAnswer == 2)
+	{
+		rightAnswer = "C";
+	}
+	if (indexOfRightAnswer == 3)
+	{
+		rightAnswer = "D";
 	}
 	
+	string print = "Choose your answer(";
+
+	if (q.answers[0] != "")
+	{
+		print += "A, ";
+	}
+	if (q.answers[1] != "")
+	{
+		print += "B, ";
+	}
+	if (q.answers[2] != "")
+	{
+		print += "C, ";
+	}
+	if (q.answers[3] != "")
+	{
+		print += "D, ";
+	}
+	print += "0 - other): ";
+	cout << print;
+	string input;
+	cin >> input;
+	while (input != "A" && input != "B" && input != "C" && input != "D" && input != "0")
+	{
+		cout << "\t\aInvalid input! Please type your choice again: ";
+		cin >> input;
+	}
+
+	if (input == rightAnswer)
+	{
+
+	}
 
 }
 
-void DisplayQ(Question& q)
+void DisplayQ(Game& g)
 {
-	Heading();
-	cout << "\t " << level << ". " << q.body << endl;
+	Question q = g.question;
+	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+		<< "\tPlayer: " << g.player << "          Level: " << g.level << "              Category : " << g.category << "            Question for $" << g.prizes[ConvertStringToInt(q.level) - 1] << "\n"
+		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+
+	cout << "\t " << g.level << ". " << q.body << endl << endl; //<< "\t";
 
 	cout << "\tA) " << q.answers[0] << "                 B) " << q.answers[1] << endl << endl
 		<< "\tC) " << q.answers[2] << "                 D) " << q.answers[3] << endl << endl;
+	/*
+	if (q.answers[0] != "")
+	{
+		cout << "A) ";
+	}
+	else
+	{
+		cout << "   ";
+	}
+	cout << q.answers[0] << "                 ";
+	if (q.answers[1] != "")
+	{
+		cout << "B) ";
+	}
+	else
+	{
+		cout << "   ";
+	}
+	cout << q.answers[1] << endl << endl << "\t";
+
+	if (q.answers[2] != "")
+	{
+		cout << "C) ";
+	}
+	else
+	{
+		cout << "   ";
+	}
+	cout << q.answers[2] << "                 ";
+	if (q.answers[3] != "")
+	{
+		cout << "D) ";
+	}
+	cout << q.answers[3] << endl << endl;*/
 }
 
 void ShuffleAnswers(Question& q)
@@ -199,10 +277,12 @@ int FindIndexOfRightAnswer(Question& q)
 			return i;
 		}
 	}
+	return -1;
 }
 
-void Lifeline50(Question& q)
+void Lifeline50(Game& g)
 {
+	Question& q = g.question;
 	int indexOfRightAnswer = FindIndexOfRightAnswer(q);
 	srand((unsigned)time(NULL));
 	string empty = "";
@@ -273,7 +353,7 @@ void Lifeline50(Question& q)
 			{
 				q.answers[randomN - 1] = empty;
 			}
-			else if (randomN == 3)
+			else if (randomN == q.answers.size() - 1)
 			{
 				q.answers[0] = empty;
 			}
@@ -288,11 +368,12 @@ void Lifeline50(Question& q)
 		q.answers[randomN] = empty;
 	}
 
-	life50 = false;
+	g.life50 = false;
 }
 
-void LifelinePhoneAFriend(Question& q)
+void LifelinePhoneAFriend(Game& g)
 {
+	Question q = g.question;
 	int index = IndexOfAnswerForLifeline(q);
 	string letter;
 	switch (index)
@@ -313,28 +394,28 @@ void LifelinePhoneAFriend(Question& q)
 	string answer = letter + ") " + q.answers[index] + ".";
 	vector<string> calls =
 	{
-		"Hello" + player + ", I think the right answer is " + answer ,
-		"Hey, Big " + player.substr(0, 1) + ", the right answer is " + answer ,
+		"Hello " + g.player + ", I think the right answer is " + answer ,
+		"Hey, Big " + g.player.substr(0, 1) + ", the right answer is " + answer ,
 		"Hii, darling, I am so honoured to be your choice to call! In my opinion, the right answer is " +  answer,
 		"The answer you are looking for is " + answer,
 		"Hmmm, I'm not really sure, but I think it is " + answer,
 		"This is not really my strong side, but I am pretty sure it's " + answer,
 		"The right answer is " + answer,
-		"Oh, " + player + ", but that's so easy! It's " + answer,
+		"Oh, " + g.player + ", but that's so easy! It's " + answer,
 		"Hey, buddy, I think the answer is " + answer + " I hope you win the game!",
 		"Hmm.. I am sorry, I can't think of anything right now, umm well..  /Time is up/"
 	};
 
 	srand((unsigned)time(NULL));
 	int randomN = (rand() % calls.size());
-	lifeline = calls[randomN];
-	lifeFriend = false;
+	g.lifeline =  "\n\t" + calls[randomN] + "\n";
+	g.lifeFriend = false;
 }
 
-void LifelineAskAudience(Question& q)
+void LifelineAskAudience(Game& g)
 {
-	lifeline = "";
-	lifeAudience = false;
+	g.lifeline = "";
+	g.lifeAudience = false;
 }
 
 // for 'Call a friend' and 'Ask Audience' lifelines
@@ -400,105 +481,122 @@ int IndexOfAnswerForLifeline(Question& q)
 	}
 }
 
-void ChooseLifeline()
+void ChooseLifeline(Game& g)
 {
 	clearScreen();
-	DisplayQ(currQ);
+	DisplayQ(g);
 
-	char input;
+	string input;
 	string printLifelines = "\n\tChoose a lifelife to use (";
-	if (!life50 && !lifeAudience && !lifeFriend)
+	if (!g.life50 && !g.lifeAudience && !g.lifeFriend)
 	{
-		lifeline = "\n\tSorry, you've used all of your lifelines already.\n";
-		return;
+		g.lifeline = "\n\tSorry, you've used all of your lifelines already.\n";
+		clearScreen();
+		MainPart(g);
 	}
 
-	if (life50 && lifeAudience && lifeFriend)
+	if (g.life50 && g.lifeAudience && g.lifeFriend)
 	{
 		printLifelines =  "\n\tChoose a lifelife to use (X - 50/50, Y - Ask the Audience,\n\tZ - Phone a Friend, 0 - decline): ";
 	}
 	else
 	{
-		if (life50)
+		if (g.life50)
 		{
 			printLifelines += "X - 50 / 50, ";
 		}
-		if (lifeAudience)
+		if (g.lifeAudience)
 		{
 			printLifelines += "Y - Ask the Audience, ";
 		}
-		if (lifeAudience)
+		if (g.lifeFriend)
 		{
 			printLifelines += "Z - Phone a Friend, ";
 		}
 		printLifelines += "0 - decline): ";
 	}
 	
-
-	
+	cout << printLifelines;
 	cin >> input;
-	while ((input != 'X' && life50) || (input != 'Y' && lifeAudience) || (input != 'Z' && lifeFriend) || input != '0')
+	while ((input != "X" || input == "X" && !g.life50) &&
+		(input != "Y" || input == "Y" && !g.lifeAudience) && 
+		(input != "Z" || input == "Z" && !g.lifeFriend) && input != "0")
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
 		cin >> input;
 	}
 
 	clearScreen();
-	switch (input)
+	if (input == "X")
 	{
-	case 'X':
-		Lifeline50(currQ);
-		MainPart(currQ);
-		break;
-	case 'Y':
-		LifelineAskAudience(currQ);
-		MainPart(currQ);
-		break;
-	case 'Z':
-		LifelinePhoneAFriend(currQ);
-		MainPart(currQ);
-	default:
-		MainPart(currQ);
-		break;
+		Lifeline50(g);
+		MainPart(g);
 	}
-
-
+	if (input == "Y")
+	{
+		LifelineAskAudience(g);
+		MainPart(g);
+	}
+	if (input == "Z")
+	{
+		LifelinePhoneAFriend(g);
+		MainPart(g);
+	}
+	if (input == "0")
+	{
+		MainPart(g);
+	}
+	
 }
 
-void QuitGame()
+void QuitGame(Game& g)
 {
-	char input;
+	int level = g.level;
+	string input;
 	cout << "\n\n\tAre you sure you want to quit the game? (y/n): ";
 	cin >> input;
-	while (input != 'y' || input != 'n')
+	while (input != "y" && input != "n")
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
 		cin >> input;
 	}
 	clearScreen();
-	if (input == 'y')
+	if (input == "y")
 	{
-		wonMoney = prizes[level - 1];
-		End();
+		if (level == 1)
+		{
+			g.wonMoney = 0;
+		}
+		else
+		{
+			g.wonMoney = g.prizes[level - 2];
+		}
+
+		End(g);
 	}
 	else
 	{
-		MainPart(currQ);
+		MainPart(g);
 	}
 }
 
-void End() 
+void End(Game& g) 
 {
-	if (wonMoney == 100000)
+	if (g.wonMoney == 100000)
 	{
-		cout << "\n\n\t\t\tCONGRATULATIONS!!!! " << player << ", you are the BIG WINNER!"
+		cout << "\n\n\t\t\tCONGRATULATIONS!!!! " << g.player << ", you are the BIG WINNER!"
 			<< "\n\t\t YOU WIN $100 000!!\n"
 			<< "\n\t\t\t YOUR GAME WAS AWESOME!\n\n";
 	}
+	else if (g.wonMoney == 0)
+	{
+		cout << "\n\n\t\t\tSorry, " << g.player << ", you quitted too early."
+			<< "\n\t\t\t You won nothing.\n\n";
+	}
 	else
 	{ 
-		cout << "\n\n\t\t\tCongratulations, " << player << "!"
-			<< "\n\t\t\t You've won $" << wonMoney << "!\n\n";
+		cout << "\n\n\t\t\tCongratulations, " << g.player << "!"
+			<< "\n\t\t\t You've won $" << g.wonMoney << "!\n\n";
 	}
 
 	pressAnyKeyToContinueSimulation();

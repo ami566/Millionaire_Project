@@ -12,10 +12,12 @@ using namespace std;
 void Homepage()
 {
     int option;
-    cout << "\n\n\n" << setw(70) << "WHO WANTS TO BE A MILLIONAIRE\n" << setfill('*')
-        << setw(150) << "\n\t  A quiz game presented to you by Amira Emin\n";
+    cout << "\n\n\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
+        << "\t\t\tWHO WANTS TO BE A MILLIONAIRE\n" 
+        << "\n\t\t\t  A quiz game presented to you by Amira Emin\n"
+        "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
     // cout.setf(ios::internal);
-    cout.width(100);
+    //cout.width(100);
     cout << "\n\n\t\t1. New Game";
     cout << "\n\n\t\t2. Game Rules";
     cout << "\n\n\t\t3. Add new question";

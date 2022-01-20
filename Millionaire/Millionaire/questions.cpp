@@ -13,7 +13,6 @@
 using namespace std;
 
 vector<Question> questions;
-string filename;
 
 void FillQuestions()
 {
@@ -38,7 +37,7 @@ void GetQuestions()
 	
 	for (int i = 1; i <= 10; i++)
 	{
-		filename = "level" + to_string(i) + ".txt";
+		string filename = "level" + to_string(i) + ".txt";
 		std::fstream myFile;
 		myFile.open(filename, std::fstream::in);
 
@@ -93,7 +92,7 @@ void GetQuestions()
 
 void AddQuestionToFile(Question q)
 {
-	filename = "level" + q.level +".txt";
+	string filename = "level" + q.level +".txt";
 	std::fstream file;
 	file.open(filename, std::fstream::out | std::fstream::app);
 	// the question would be saved on the txt file in the following format:
@@ -194,7 +193,7 @@ void DeleteQuestion(Question q, char c)
 
 void RewriteFile(string level)
 {
-	filename = "level" + level + ".txt";
+	string filename = "level" + level + ".txt";
 	// we open the text file with the trunc option and then close it to delete its contents
 	std::fstream file;
 	file.open(filename, std::fstream::out | std::fstream::trunc);

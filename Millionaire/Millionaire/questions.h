@@ -21,13 +21,9 @@ struct QuestionsList {
 	int qPerLevel[10] = { 0,0,0,0,0,0,0,0,0,0 };
 };
 
-//void GetQuestions();
-
 std::vector<Question> GetQuestions();
 
 Question* FindQuestionById(std::vector<Question>& questions, std::string id);
-
-//void FillQuestions();
 
 void AddQuestionToFile(Question q);
 

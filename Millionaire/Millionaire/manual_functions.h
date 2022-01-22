@@ -15,4 +15,8 @@ void clearScreen();
 
 void SwapStrings(std::string& a, std::string& b);
 
+void sortIntArr(int*& arr, int n);
+
+void SwapInt(int& a, int& b);
+
 #endif

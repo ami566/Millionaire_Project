@@ -61,10 +61,6 @@ void Begin(vector<Question>& questions)
 		game.category = categories[categoryNum-1];
 	}
 
-	/*game.level = 1;
-	game.life50 = true;
-	game.lifeFriend = true;
-	game.lifeAudience = true;*/
 	game.qList.list = questions;
 	clearScreen();
 	RulesShort();
@@ -265,7 +261,7 @@ void DisplayQ(Game& g)
 {
 	Question q = g.question;
 	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-		<< "\tPlayer: " << g.player << "          Level: " << g.level << "              Category : " << g.category << "            Question for $" << g.prizes[ConvertStringToInt(q.level) - 1] << "\n"
+		<< "\tPlayer: " << g.player << "          Level: " << g.level << "              Category : " << g.category << "            Question for $" << g.prizes[g.level - 1] << "\n"
 		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 
 	cout << "\t " << g.level << ". " << q.body << endl << endl; //<< "\t";
@@ -336,9 +332,16 @@ void Lifeline50(Game& g)
 {
 	Question& q = g.question;
 	int indexOfRightAnswer = FindIndexOfRightAnswer(q);
+	
 	srand((unsigned)time(NULL));
-	string empty = "";
-	int randomN = (rand() % 4);
+
+	string empty = ""; // to use when removing an answer
+
+	int randomN = (rand() % 4); // generating random digit from 0 to 3 which would be the index of the first answer that would be removed
+
+	// if the generated random digit happens to be the same as the right answer, which could not be removed
+	// then we move the random digit by one to the left. If however it happens to be the first value and moving to left means 
+	// going out of the the array, we change the the random digit to the last one, i.e in this case 3
 	if (randomN == indexOfRightAnswer)
 	{
 		if (randomN == 0)
@@ -355,7 +358,12 @@ void Lifeline50(Game& g)
 		q.answers[randomN] = empty;
 	}
 
-	randomN = (rand() % 4);
+	randomN = (rand() % 4); // generating random digit for the second answer that would be eliminated
+
+	// proceeding to do the same check as for the first one, however this time the random digit could 
+	// also fall to an empty answer, and that too have to be checked and considered.
+	// So if the digit we have gotten could not remain the same and also cannot be moved to the left
+	// we move it to the right by 1 (+ 1) and there won't be any problems, since there is only one right and one empty answer
 	if (randomN == indexOfRightAnswer)
 	{
 		if (randomN == 0)
@@ -420,14 +428,17 @@ void Lifeline50(Game& g)
 		q.answers[randomN] = empty;
 	}
 
-	g.life50 = false;
+	g.life50 = false;  // to mark the flag of this lifeline false (i.e lifelife Ask Audience is now used)
 }
 
 void LifelinePhoneAFriend(Game& g)
 {
 	Question q = g.question;
+	// to get the random generated with conditions depending on the level index of the answer that is 
+	// to have the greatest value to show
 	int index = IndexOfAnswerForLifeline(q);
-	string letter;
+	string letter; // to store the letter of the answer that is to be shown
+	// switch-case is used to find the letter of the answer that is to be shown
 	switch (index)
 	{
 	case 0:
@@ -444,6 +455,8 @@ void LifelinePhoneAFriend(Game& g)
 		break;
 	}
 	string answer = letter + ") " + q.answers[index] + ".";
+
+	// vector that holds some "calls" that the player can receive by a friend
 	vector<string> calls =
 	{
 		"Hello " + g.player + ", I think the right answer is " + answer ,
@@ -459,33 +472,94 @@ void LifelinePhoneAFriend(Game& g)
 	};
 
 	srand((unsigned)time(NULL));
-	int randomN = (rand() % calls.size());
-	g.lifeline =  "\n\t" + calls[randomN] + "\n";
-	g.lifeFriend = false;
+	int randomN = (rand() % calls.size());              // to get a random "call by a friend" from the vector
+	g.lifeline =  "\n\t" + calls[randomN] + "\n";       // to save the line that is to be shown to the user
+	g.lifeFriend = false;                               // to mark the flag of this lifeline false (i.e lifelife Ask Audience is now used)
 }
 
 void LifelineAskAudience(Game& g)
 {
+	// to get the random generated with conditions depending on the level index of the answer that is 
+	// to have the greatest value to show
 	int index = IndexOfAnswerForLifeline(g.question);
-	string letter;
-	switch (index)
+	
+	// this array will be used to hold the random generated percents for the audience vote
+	// using array, since the values would be easier to sort if needed
+	int* percents = new int[4];
+
+	srand((unsigned)time(NULL));
+	
+	// if all the answers are present (i.e lifeline 50/50 hasn't been used on this question previously)
+	// 4 different values which sum is 100 (to complete the 100%) need to be generated
+	if (g.question.answers[0] != "" && g.question.answers[1] != "" && g.question.answers[2] != "" && g.question.answers[3] != "") 
 	{
-	case 0:
-		letter = 'A';
-		break;
-	case 1:
-		letter = 'B';
-		break;
-	case 2:
-		letter = 'C';
-		break;
-	case 3:
-		letter = 'D';
-		break;
+		// wholly random algorithm is used to populate the array with some values to complete the 100%
+		percents[0] = (rand() % 70);
+		percents[1] = (rand() % (100 - percents[0]));
+		percents[2] = (rand() % (110 - percents[0] - percents[1]));
+		percents[3] = 100 - (percents[0] + percents[1] + percents[2]);
+
+		// we sort the arrays so we know for sure that the first value is the greatest among the rest
+		// so it's easier on a later stage to give that biggest value to the answer that is received to be
+		// the chosen one, could be either right or wrong
+		sortIntArr(percents, 4);
 	}
-	cout << letter;
-	g.lifeline = "";
-	g.lifeAudience = false;
+	// if the 50/50 lifeline is used and there are empty answers, there would be needed only 2 numbers with sum 100 to be generated
+	else
+	{
+		percents[0] = 51 + (rand() % 40); // so we know that the first value holds the biggest value for sure
+		percents[1] = 100 - percents[0];
+	}
+	
+	// if the chosen answer is not the first one, we swap the values to the first one and to the one which has to hold the biggest value
+	if (index != 0)
+	{
+		SwapInt(percents[0], percents[index]);
+	}
+
+	if (g.question.answers[0] == "" || g.question.answers[1] == "" || g.question.answers[2] == "" || g.question.answers[3] == "")
+	{
+		// in case there are empty answers, the one left that is not the chosen one, might be at any position
+		// so we find it and give it the second value that completes the 100 % with the chosen one
+		if (g.question.answers[0] != "" && index != 0)
+		{
+			SwapInt(percents[0], percents[1]);
+		}
+		if (g.question.answers[2] != "" && index != 2)
+		{
+			SwapInt(percents[2], percents[1]);
+		}
+		if (g.question.answers[3] != "" && index != 3)
+		{
+			SwapInt(percents[3], percents[1]);
+		}
+	}
+
+	// here we make the string that is to be shown to the user with the answers' letters and percents
+	string print = "\n\tAudience vote: ";
+	if (g.question.answers[0] != "")
+	{
+		print += "  A - " + to_string(percents[0]) + "%        ";
+	}
+
+	if (g.question.answers[1] != "")
+	{
+		print += "B - " + to_string(percents[1]) + "%        ";
+	}
+
+	if (g.question.answers[2] != "")
+	{
+		print += "C - " + to_string(percents[2]) + "%        ";
+	}
+
+	if (g.question.answers[3] != "")
+	{
+		print += "D - " + to_string(percents[3]) + "%        ";
+	}
+
+	delete[] percents;               // to free the heap memory that was used to store the percents
+	g.lifeline = print + "\n\n";     // to save the line that is to be shown to the user
+	g.lifeAudience = false;          // to mark the flag of this lifeline false (i.e lifelife Ask Audience is now used)
 }
 
 // for 'Call a friend' and 'Ask Audience' lifelines

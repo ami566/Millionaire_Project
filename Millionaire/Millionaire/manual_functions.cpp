@@ -65,3 +65,24 @@ void SwapStrings(string& a, string& b)
 	a = b;
 	b = c;
 }
+
+void sortIntArr(int*& arr, int n)
+{
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (arr[j] < arr[j + 1])
+			{
+				SwapInt(arr[j], arr[j + 1]);
+			}
+		}
+	}
+}
+
+void SwapInt(int& a, int& b)
+{
+	int c = a;
+	a = b;
+	b = c;
+}

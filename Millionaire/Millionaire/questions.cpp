@@ -12,24 +12,6 @@
 
 using namespace std;
 
-//vector<Question> questions;
-
-//void FillQuestions()
-//{
-//	// checks if the questions vector is empty and if it is, we populate it with the questions from the text files
-//	// the questions vector can already contain elements if we have called the GetQuestions function previously during the program
-//	if (questions.empty())
-//	{
-//		GetQuestions();
-//	}
-//}
-
-//vector<Question> Questions() 
-//{
-//	FillQuestions();
-//	return questions;
-//}
-
 vector<Question> GetQuestions()
 {
 	vector<Question> questions;

@@ -74,10 +74,10 @@ void Begin(vector<Question>& questions)
 	pressAnyKeyToContinueSimulation();
 	clearScreen();
 	GetQuestionsForCurrentGame(game);
-	NewGame(game);
+	PlayGame(game);
 }
 
-void NewGame(Game& g)
+void PlayGame(Game& g)
 {
 	g.question = GetQuestionForLevel(g);     // so the random question gets "generated"
 	ShuffleAnswers(g.question);              // to shuffle all of the answers
@@ -254,11 +254,11 @@ void NextLevel(Game& g)
 	}
 
 	clearScreen();
-	cout << "\n\n\t\t\tCongratulations! You won $" << g.prizes[g.level - 1] << "!\n\n";
+	cout << "\n\n\t\t\tCongratulations! You won $" << g.prizes[g.level - 1] << "!\n\n\t";
 	g.level++;
 	pressAnyKeyToContinueSimulation();
 	clearScreen();
-	NewGame(g);
+	PlayGame(g);
 }
 
 void DisplayQ(Game& g)

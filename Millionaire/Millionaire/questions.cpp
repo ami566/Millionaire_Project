@@ -15,11 +15,11 @@ using namespace std;
 vector<Question> GetQuestions()
 {
 	vector<Question> questions;
-	string buffer;
+	string buffer; // to store every new line from the text file
 	
 	for (int i = 1; i <= 10; i++)
 	{
-		string filename = "level" + to_string(i) + ".txt";
+		string filename = "level" + to_string(i) + ".txt"; // to get the whole name of the file we want to open
 		std::fstream myFile;
 		myFile.open(filename, std::fstream::in);
 
@@ -103,10 +103,14 @@ void EditQ(vector<Question>& questions, Question q)
 	string input;
 	const string noChange = "@!";
 	
-	cout << "\n\t\t  Fill out the following fields about the question:\n"
-		<< "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n"
-		<< "\t!!! If you don't want to edit the field you are on, type '" << noChange <<"'.\n "
-		<< "\tand the original value would remain, otherwise just type your new entry!!!\n";
+	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+		<< "\tDISCLAIMER: To exit at any time, type '" << exit << "' and you will return to the Hompepage, no changes \n"
+		<< "\twould be saved. Otherwise, please refrain using these symbols: '" << valid1 << "' and '" << valid2 << "'.\n"
+		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+	cout << "\tNOTICE: If you don't want to edit the field you are on, type '" << noChange << "' and the original value\n "
+		<< "\twould remain, otherwise just type your new entry!!!\n"
+		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+		<< "\n\t\t\t  Fill out the following fields about the question:\n";
 
 	cout << "\n\n\t  ID: " << q.id << " (Not changeable)";
 	cout << "\n\t  Difficulty level: " << q.level << " (Not changeable)";

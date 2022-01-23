@@ -1,6 +1,7 @@
 #include "rules.h"
 #include <iostream>
 using namespace std;
+
 void DisplayRules()
 {
     cout << "\n\t\t\tWELCOME TO 'WHO WANTS TO BE A MILLIONAIRE' - THE QUIZ GAME!\n\n"

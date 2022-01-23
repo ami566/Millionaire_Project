@@ -13,11 +13,10 @@ void Homepage()
     vector<Question> questions = GetQuestions();
     int option;
     cout << "\n\n\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
-        << "\t\t\tWHO WANTS TO BE A MILLIONAIRE\n" 
-        << "\n\t\t\t  A quiz game presented to you by Amira Emin\n"
+        << "\t\t\t\t\tWHO WANTS TO BE A MILLIONAIRE\n" 
+        << "\n\t\t\t\tA quiz game presented to you by Amira Emin\n"
         "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-    // cout.setf(ios::internal);
-    //cout.width(100);
+    
     cout << "\n\n\t\t1. New Game";
     cout << "\n\t\t2. Game Rules";
     cout << "\n\t\t3. Add new question";
@@ -68,7 +67,7 @@ void Rules()
 void AddQuestion(vector<Question>& questions)
 {
     clearScreen();
-    cout << "\n   ADD NEW QUESTION FORM\n";
+    cout << "\n\t\t   ADD NEW QUESTION FORM\n";
     AddQuestionToFile(GetQuestionFromInput(questions));
     cout << endl;
     pressAnyKeyToContinueSimulation();
@@ -77,17 +76,23 @@ void AddQuestion(vector<Question>& questions)
 
 void EditQuestionHome(vector<Question>& questions)
 {
-    cout << "\n   CHOOSE QUESTION TO EDIT\n";
+    cout << "\n\t\t\t   CHOOSE QUESTION TO EDIT\n";
     
-    cout << "\n  Do you want all the questions to be displayed or would you want\n"
-         << "  to search for a specific question with a keyword/s to edit it?\n";
-    cout << "\n  Type 'a'/'A' for all questions or 's'/'S' to search: ";
+    cout << "\n\tDo you want all the questions to be displayed or would you want\n"
+         << "\tto search for a specific question with a keyword/s to edit it?\n";
+    cout << "\n\tType 'a'/'A' for all questions or 's'/'S' to search (type '0' to go back): ";
     string opt;
     cin >> opt;
     opt = returnStringToLower(opt);
+    while (opt != "a" && opt != "s" && opt != "0")
+    {
+        cout << "\t\aInvalid input! Please type your choice again: ";
+        cin >> opt;
+    }
+
     clearScreen();
-    cout << "\n   EDIT QUESTION FORM\n";
-    cout << "\n //'ID: question' format of display//\n";
+    cout << "\n\t\t\tEDIT QUESTION FORM\n";
+    cout << "\n\t\t //'ID: question' format of display//\n";
     
     int qCount;
 
@@ -99,7 +104,7 @@ void EditQuestionHome(vector<Question>& questions)
     }
     else if (opt == "s")
     {
-        cout << "\nType in a keyword/s: ";
+        cout << "\n\tType in a keyword/s: ";
         string keyword;
         cin.ignore();
         getline(cin, keyword);
@@ -107,24 +112,32 @@ void EditQuestionHome(vector<Question>& questions)
         qCount = DisplayQuestions(questions, keyword);
         if (qCount == 0)
         {
-            cout << "\n   Sorry there aren't any questions that match ' " + keyword + "'.\n\n  ";
+            cout << "\n   Sorry there aren't any questions that match ' " + keyword + "'.\n\n\t";
             pressAnyKeyToContinueSimulation();
             clearScreen();
             EditQuestionHome(questions);
         }
         cout << "\n\n   Total matches: " + to_string(qCount) + " questions \n\n";
     }
+    else if (opt == "0")
+    {
+        GoBackToMain();
+    }
     else
     {
         InvalidInput();
         EditQuestionHome(questions);
     }
-    cout << "\n  Type the ID of the question you would like to edit: ";
+    cout << "\n  Type the ID of the question you would like to edit (M - to go back): ";
     
     string id;
     cin >> id;
     while (FindQuestionById(questions, id)==NULL)
     {
+        if (id == "M")
+        {
+            GoBackToMain();
+        }
         cout << "  \aInvalid ID! Please type it again: ";
         cin >> id;
     }
@@ -141,10 +154,11 @@ void EditQuestion(vector<Question>& questions, Question q)
     cout<< "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 
     cout << "\n\tDo you want to delete or edit the question? \n"
-        << "\tType 'd' or 'D' for 'delete' and 'e'  or 'E' for 'edit': ";
+        << "\tType 'd' or 'D' for 'delete' and 'e', 'E' for 'edit' or '0' to go back to homepage: ";
     char input;
     cin >> input;
-    while (input != 'D'&& input != 'd' && input != 'e' && input != 'E')
+    // to validate the input
+    while (input != 'D'&& input != 'd' && input != 'e' && input != 'E' && input != '0')
     {
         cout << "\t\aInvalid input! Please type your choice again: ";
         cin >> input;
@@ -175,6 +189,9 @@ void EditQuestion(vector<Question>& questions, Question q)
     case 'E':
     case 'e':
         EditQ(questions, q);
+        break;
+    case '0':
+        GoBackToMain();
     }
     pressAnyKeyToContinueSimulation();
     GoBackToMain();

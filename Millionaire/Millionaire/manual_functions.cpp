@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 
-// it works for only positive numbers, since we don't need negative ones
+// it works for only positive numbers, negative ones are never used nor needed
 int ConvertStringToInt(string str)
 {
 	int number = 0;

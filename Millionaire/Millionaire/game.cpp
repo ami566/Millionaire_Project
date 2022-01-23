@@ -6,18 +6,23 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 void Begin(vector<Question>& questions)
 {
 	Game game;
+	// print the heading part
 	cout << "\n\n\t\t\tWELCOME TO 'WHO WANTS TO BE A MILLIONAIRE' - THE QUIZ GAME!\n\n"
 		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
 		<< "\tHow would you like to be adressed as? (Enter a name): ";
 	cin.ignore();
-	getline(cin, game.player);
+
+	getline(cin, game.player); // to get the player's name
+
 	cout << "\n\n\t\t\tChoose a category to play in: \n\n";
 
+	// gets and then displayes all of the present categories, available to play in
 	vector<string> categories = GetCategories(questions);
 	int i = 0;
 	for (; i < categories.size(); i++)
@@ -41,6 +46,7 @@ void Begin(vector<Question>& questions)
 	}
 
 	int categoryNum = ConvertStringToInt(input);
+	// to validate the input
 	while(categoryNum <= 0 || categoryNum > categories.size()+1 )
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
@@ -52,6 +58,7 @@ void Begin(vector<Question>& questions)
 		categoryNum = ConvertStringToInt(input);
 	}
 
+	// adds the last category, which basically includes all of the questions 
 	if (categoryNum == i + 1)
 	{
 		game.category = "All";
@@ -72,9 +79,9 @@ void Begin(vector<Question>& questions)
 
 void NewGame(Game& g)
 {
-	g.question = GetQuestionForLevel(g);
-	ShuffleAnswers(g.question);
-	g.lifeline = " ";
+	g.question = GetQuestionForLevel(g);     // so the random question gets "generated"
+	ShuffleAnswers(g.question);              // to shuffle all of the answers
+	g.lifeline = " ";                        // to clear the lifeline for the next level
 	MainPart(g);
 }
 
@@ -107,17 +114,11 @@ void QuestionsForLevel(Game& g)
 	}
 }
 
-//void Heading()
-//{
-//	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-//		<< "\tPlayer: " << player << "          Level: " << q.level << "              Category : "<< categGame << "            Question for $" << prizes[level - 1] << "\n"
-//		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
-//}
-
 void MainPart(Game& g)
 {
 	DisplayQ(g);
 
+	// to print the lifeline, if such has been previously called
 	if (g.lifeline != "")
 	{
 		cout << g.lifeline;
@@ -127,12 +128,14 @@ void MainPart(Game& g)
 	cout << "\n\tWhat would you like to do? (S - give an answer, "
 		<< "\n\tL - use a lifeline, Q - to quit the game): ";
 	cin >> input;
+	// to validate the input
 	while (input != "L" && input != "Q" && input != "S")
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
 		cin >> input;
 	}
 	
+	// depending on the received from the console input, the respective function is called
 	if (input == "L")
 	{
 		ChooseLifeline(g);
@@ -145,8 +148,6 @@ void MainPart(Game& g)
 	{
 		GiveAnswer(g);
 	}
-
-	//g.lifeline = " ";
 }
 
 void GiveAnswer(Game& g)
@@ -173,8 +174,8 @@ void GiveAnswer(Game& g)
 		rightAnswer = "D";
 	}
 	
-	string print = "\n\tChoose your answer(";
-
+	string print = "\n\tChoose your answer (";
+	// to display the letters of the not empty answers
 	if (q.answers[0] != "")
 	{
 		print += "A, ";
@@ -191,16 +192,19 @@ void GiveAnswer(Game& g)
 	{
 		print += "D, ";
 	}
-	print += "0 - other): ";
+	print += "0 - decline): ";
 	cout << print;
 	string input;
 	cin >> input;
+	// to validate the input
 	while (input != "A" && input != "B" && input != "C" && input != "D" && input != "0")
 	{
 		cout << "\t\aInvalid input! Please type your choice again: ";
 		cin >> input;
 	}
 
+	// depending on the received from the console answer, the game is either switched to the next 
+	// level, lost, or the player has decided to do something else, rather than give answer
 	if (input == rightAnswer)
 	{
 		NextLevel(g);
@@ -260,48 +264,51 @@ void NextLevel(Game& g)
 void DisplayQ(Game& g)
 {
 	Question q = g.question;
+	// prints the heading
 	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
 		<< "\tPlayer: " << g.player << "          Level: " << g.level << "              Category : " << g.category << "            Question for $" << g.prizes[g.level - 1] << "\n"
 		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+	// prints the question
+	cout << "\t " << g.level << "."; // << q.body << endl << endl;
+	int length = q.body.size();
+	int index = 0;
+	
+	cout << " " << q.body << endl << endl;
+	//
+	//if (length <= 100)
+	//{
+	//	cout << " " << q.body << endl << endl;
+	//}
+	//else
+	//{
+	//	while (length > 10)
+	//	{
+	//		cout << " " << q.body.substr(index, 100) << "\n\t"; // ??? why isn't this working properly
+	//		length -= 100;
+	//		index += 100;
+	//	}
+	//	if (index < length)
+	//	{
+	//		cout << " " << q.body.substr(index, q.body.size()) << "\n";
+	//	}
+	//}
+	int spaces = 20; // set the default space place between two answers in a line to be 20 spaces 
+	int spaces2 = spaces;
 
-	cout << "\t " << g.level << ". " << q.body << endl << endl; //<< "\t";
-
-	cout << "\tA) " << q.answers[0] << "                 B) " << q.answers[1] << endl << endl
-		<< "\tC) " << q.answers[2] << "                 D) " << q.answers[3] << endl << endl;
-	/*
-	if (q.answers[0] != "")
+	// if either answe 1 or 3 is longer than the other, we calculate the difference between their 
+	// lengths and add it as spaces to the shorter one  
+	if (q.answers[0].size() < q.answers[2].size())
 	{
-		cout << "A) ";
+		spaces += q.answers[2].size() - q.answers[0].size();
 	}
 	else
 	{
-		cout << "   ";
+		spaces2 += q.answers[0].size() - q.answers[2].size();
 	}
-	cout << q.answers[0] << "                 ";
-	if (q.answers[1] != "")
-	{
-		cout << "B) ";
-	}
-	else
-	{
-		cout << "   ";
-	}
-	cout << q.answers[1] << endl << endl << "\t";
-
-	if (q.answers[2] != "")
-	{
-		cout << "C) ";
-	}
-	else
-	{
-		cout << "   ";
-	}
-	cout << q.answers[2] << "                 ";
-	if (q.answers[3] != "")
-	{
-		cout << "D) ";
-	}
-	cout << q.answers[3] << endl << endl;*/
+	// print the answers
+	cout << "\t A) " << q.answers[0] << setw(spaces) << "B) " << q.answers[1] << endl << endl
+		<< "\t C) " << q.answers[2] << setw(spaces2) << " D) " << q.answers[3] << endl << endl
+		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 }
 
 void ShuffleAnswers(Question& q)
@@ -313,7 +320,6 @@ void ShuffleAnswers(Question& q)
 	SwapStrings(q.answers[2], q.answers[randomN]);
 	randomN = (rand() % 2);
 	SwapStrings(q.answers[1], q.answers[randomN]);
-
 }
 
 int FindIndexOfRightAnswer(Question& q)
@@ -495,8 +501,8 @@ void LifelineAskAudience(Game& g)
 	{
 		// wholly random algorithm is used to populate the array with some values to complete the 100%
 		percents[0] = (rand() % 70);
-		percents[1] = (rand() % (100 - percents[0]));
-		percents[2] = (rand() % (110 - percents[0] - percents[1]));
+		percents[1] = (rand() % (90 - percents[0]));
+		percents[2] = (rand() % (100 - percents[0] - percents[1]));
 		percents[3] = 100 - (percents[0] + percents[1] + percents[2]);
 
 		// we sort the arrays so we know for sure that the first value is the greatest among the rest
@@ -632,6 +638,8 @@ void ChooseLifeline(Game& g)
 
 	string input;
 	string printLifelines = "\n\tChoose a lifelife to use (";
+
+	// to print a message of all of the lifelines have been used
 	if (!g.life50 && !g.lifeAudience && !g.lifeFriend)
 	{
 		g.lifeline = "\n\tSorry, you've used all of your lifelines already.\n";
@@ -645,6 +653,7 @@ void ChooseLifeline(Game& g)
 	}
 	else
 	{
+		// these conditions are so a lifeline that has already been used, to not be printed again
 		if (g.life50)
 		{
 			printLifelines += "X - 50 / 50, ";
@@ -662,6 +671,8 @@ void ChooseLifeline(Game& g)
 	
 	cout << printLifelines;
 	cin >> input;
+	// checks if the input is valid, that is either any one of the symbols that represent the lifelines (X, Y or Z)
+	// or even if they have chosen one of those, but the lifeline has already been used
 	while ((input != "X" || input == "X" && !g.life50) &&
 		(input != "Y" || input == "Y" && !g.lifeAudience) && 
 		(input != "Z" || input == "Z" && !g.lifeFriend) && input != "0")
@@ -671,6 +682,7 @@ void ChooseLifeline(Game& g)
 	}
 
 	clearScreen();
+	// to call the respective function for the chosen lifeline
 	if (input == "X")
 	{
 		Lifeline50(g);
@@ -713,7 +725,7 @@ void QuitGame(Game& g)
 		}
 		else
 		{
-			g.wonMoney = g.prizes[level - 2];
+			g.wonMoney = g.prizes[level - 2]; // gets the last sum won, i.e the money from the previous level
 		}
 
 		End(g);
@@ -727,21 +739,24 @@ void QuitGame(Game& g)
 void End(Game& g) 
 {
 	clearScreen();
-	if (g.wonMoney == 100000)
+	
+	if (g.wonMoney == g.prizes[9]) // if the money are equal to 100000, then the game has been won
 	{
 		cout << "\n\n\t\t\tCONGRATULATIONS!!!! " << g.player << ", you are the BIG WINNER!"
-			<< "\n\t\t YOU WIN $100 000!!\n"
-			<< "\n\t\t\t YOUR GAME WAS AWESOME!\n\n";
+			<< "\n\t\t\t\t YOU WIN $100 000!!\n"
+			<< "\n\t\t\t\t\t YOUR GAME WAS AWESOME!\n\n";
 	}
+	// if there aren't any money won, then the game has been quitted before completing the first level
 	else if (g.wonMoney == 0)
 	{
 		cout << "\n\n\t\t\tSorry, " << g.player << ", you quitted too early."
-			<< "\n\t\t\t You won nothing.\n\n";
+			<< "\n\t\t\t\t You won nothing.\n\n";
 	}
+	// any other case, when quitted the game, this is what would be shown to the player
 	else
 	{ 
 		cout << "\n\n\t\t\tCongratulations, " << g.player << "! It was a great game!"
-			<< "\n\t\t\t You've won $" << g.prizes[g.level - 2] << "!\n\n";
+			<< "\n\t\t\t\t You've won $" << g.prizes[g.level - 2] << "!\n\n";
 	}
 
 	pressAnyKeyToContinueSimulation();

@@ -3,4 +3,4 @@
 23672|Science|What is Anthropology the study of?|structure and functions&heredity and variations&life in outer space&structural and cultural traits of human beings|structural and cultural traits of human beings
 23608|Science|Non stick cooking utensils are coated with:|Teflon&PVC&Black paint&Polystyrene|Teflon
 32133|Geography|In which country is the Suez Canal located?|Egypt&Algeria&Saudi Arabia&South Africa|Egypt
-13935|Culture|Which of the following actors haven't played in the role of Spiderman in a movie?|Timothee Chalamet&Tom Holland&Andrew Garfield&Tobey Maguire|Timothee Chalamet
+13935|Culture|Which of the following actors hasn't played in the role of Spiderman in a movie?|Timothee Chalamet&Tom Holland&Andrew Garfield&Tobey Maguire|Timothee Chalamet

@@ -196,21 +196,24 @@ void AddQuestionToList(vector<Question>& questions, Question q)
 	questions.emplace_back(q);
 }
 
-void DisplayQuestions(vector<Question>& questions, string keyword)
+int DisplayQuestions(vector<Question>& questions, string keyword)
 {	
+	int count = 0;
+	// if there isn't a keyword given, print all the questions
 	if (keyword == "")
 	{
 		for (auto& q : questions)
 		{
 			PrintQ(q);
+			count++;
 		}
-		return;
+		return count;
 	}
 	
-	stringToLower(keyword);
+	stringToLower(keyword); // to not have case-sensitive search
 	for (auto& q : questions)
 	{
-		string answers;
+		string answers; // to get the answers in one string so it would be easier to go through them later on
 		for (auto& a : q.answers)
 		{
 			answers += a + " ";
@@ -221,9 +224,10 @@ void DisplayQuestions(vector<Question>& questions, string keyword)
 			returnStringToLower(q.body).find(keyword) != string::npos || answers.find(keyword) != string::npos)
 		{
 			PrintQ(q);
+			count++;
 		}
 	}
-	
+	return count;
 }
 
 void PrintQ(Question q)

@@ -5,7 +5,6 @@
 #include "rules.h"
 #include "questions.h"
 #include "game.h"
-#include <iomanip>
 #include <string>
 using namespace std;
 
@@ -20,10 +19,10 @@ void Homepage()
     // cout.setf(ios::internal);
     //cout.width(100);
     cout << "\n\n\t\t1. New Game";
-    cout << "\n\n\t\t2. Game Rules";
-    cout << "\n\n\t\t3. Add new question";
-    cout << "\n\n\t\t4. Edit an existing question";
-    cout << "\n\n\t\t5. Exit";
+    cout << "\n\t\t2. Game Rules";
+    cout << "\n\t\t3. Add new question";
+    cout << "\n\t\t4. Edit an existing question";
+    cout << "\n\t\t5. Exit";
     cout << "\n\n\t\tEnter your choice (1 - 5): ";
     cin >> option;
 
@@ -89,11 +88,14 @@ void EditQuestionHome(vector<Question>& questions)
     clearScreen();
     cout << "\n   EDIT QUESTION FORM\n";
     cout << "\n //'ID: question' format of display//\n";
+    
+    int qCount;
 
     if (opt == "a")
     {
         cout << "\n   All questions are being displayed.\n\n";
-        DisplayQuestions(questions, "");
+        qCount = DisplayQuestions(questions, "");
+        cout << "\n\n   Total: " + to_string(qCount) + " questions \n\n";
     }
     else if (opt == "s")
     {
@@ -102,7 +104,15 @@ void EditQuestionHome(vector<Question>& questions)
         cin.ignore();
         getline(cin, keyword);
         cout << "\n   Questions that contain the keyword in their category, body, or in their answers are being displayed.\n\n";
-        DisplayQuestions(questions, keyword);
+        qCount = DisplayQuestions(questions, keyword);
+        if (qCount == 0)
+        {
+            cout << "\n   Sorry there aren't any questions that match ' " + keyword + "'.\n\n  ";
+            pressAnyKeyToContinueSimulation();
+            clearScreen();
+            EditQuestionHome(questions);
+        }
+        cout << "\n\n   Total matches: " + to_string(qCount) + " questions \n\n";
     }
     else
     {

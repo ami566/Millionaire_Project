@@ -3,5 +3,5 @@
 35647|Science|What is the human body's largest organ?|Skin&Lungs&Heart&Liver|Skin
 67432|History|When was Bulgaria founded?|701 AD&681 AD&917 AD&885 AD|681 AD
 16669|Culture|The phrase 'bon voyage' meaning have a safe or good trip, comes from which language?|French&Russian&Spanish&Japanese|French
-16789|Geography|Which is the capital of Brazil?|Brazil&Rio de Janeiro&Sao Paulo&Buenos Aires|Brazil
+16789|Geography|Which is the capital of Brazil?|Brasilia&Rio de Janeiro&Sao Paulo&Buenos Aires|Brazil
 9571|Culture|What's the name of the first novel in the Harry Potter series by J. K. Rowling, published in 1997?|Harry Potter and the Sorcerer's Stone&Harry Potter and the Prizoner of Azkaban&Harry Potter and the Order of the Phoenix&Harry Potter and the Cursed Child|Harry Potter and the Sorcerer's Stone

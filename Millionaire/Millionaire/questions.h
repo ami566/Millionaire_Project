@@ -29,7 +29,7 @@ void AddQuestionToFile(Question q);
 
 void AddQuestionToList(std::vector<Question>& questions, Question q);
 
-void DisplayQuestions(std::vector<Question>& questions, std::string keyword);
+int DisplayQuestions(std::vector<Question>& questions, std::string keyword);
 
 void EditQ(std::vector<Question>& questions, Question q);
 

@@ -6,3 +6,4 @@
 18758|Culture|In Snow White and the Seven Dwarfs which is the only dwarf not to have a beard?|Dopey&Grumpy&Sleepy&Sneezy|Dopey
 23812|Culture|In Egypt, you have been invited to a meal at a family home. Towards the end of the meal you are very full. Your hostess offers you more food. What should you do?|Accept and take a small bite.&Refuse politely.&Accept and eat everything on your plate.&Accept and ask if you can take it with you.|Accept and take a small bite.
 30220|Culture|What Martin Scorsese movie holds the all-time record for F-bombs?|The Wolf Of Wall Street&Casino&Goodfellas&The Departed|The Wolf Of Wall Street
+32057|Culture|What one-hit-wonder released the 1997 hit song "Barbie Girl"?|Aqua&Macy Gray&Friend and Lover&Cheryl Lynn|Aqua

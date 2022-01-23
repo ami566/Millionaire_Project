@@ -43,6 +43,8 @@ void RewriteFile(std::vector<Question>& questions, std::string fileNum);
 
 Question GetQuestionFromInput(std::vector<Question>& questions);
 
+void ValidateInput(std::string& input, const std::string& valid1, const std::string& valid2, const std::string& errorM, const std::string& exit);
+
 std::vector<std::string> GetCategories(std::vector<Question>& questions);
 
 QuestionsList QuestionsForGame(std::vector<Question>& questions, std::string category);

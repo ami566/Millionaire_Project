@@ -9,3 +9,4 @@
 24253|Culture|Which of the following names is not of one of Kim Kardashian and Kanye West's kids?|Stormi&North&Psalm&Chicago|Stormi
 28952|Culture|What is the highest-grossing R-rated movie of all time?|Joker&Deadpool 2&The Matrix Reloaded&It|Joker
 30850|Culture|In 'Friends' whom did Ros Geller not divorce?|Mona&Emily&Rachel&Carol|Mona
+22790|Culture|What movie has the best-selling soundtrack of all time?|The Bodyguard&Titanic&Dirty Dancing&The Lion King|The Bodyguard

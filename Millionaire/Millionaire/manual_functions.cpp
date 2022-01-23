@@ -1,4 +1,5 @@
 #include "manual_functions.h"
+#include "hpfunctions.h"
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -85,4 +86,10 @@ void SwapInt(int& a, int& b)
 	int c = a;
 	a = b;
 	b = c;
+}
+
+void GoBackToMain()
+{
+	clearScreen();
+	Homepage();
 }

@@ -186,8 +186,3 @@ void InvalidInput()
     cout << "\n\a  Invalid input! Please try typing your choice again! \n\n";
 }
 
-void GoBackToMain()
-{
-    clearScreen();
-    Homepage();
-}

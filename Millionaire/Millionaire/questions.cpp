@@ -93,13 +93,19 @@ void AddQuestionToFile(Question q)
 
 void EditQ(vector<Question>& questions, Question q)
 {
+	const string exit = "&|";   // the string if given as input, would mean the player wants to go back to the main panel
+	const string valid1 = "|";  // to use for the validation since the text in the files is stored and read with these symbols as breakpoints
+	const string valid2 = "&";  // same application as valid1
+	const string errorM = "\a\tInvalid input, please try again: ";
+
 	DeleteQuestion(questions, q, ' ');
 
 	string input;
+	const string noChange = "@!";
 	
 	cout << "\n\t\t  Fill out the following fields about the question:\n"
 		<< "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n"
-		<< "\t!!! If you don't want to edit the field you are on, type '@!'\n "
+		<< "\t!!! If you don't want to edit the field you are on, type '" << noChange <<"'.\n "
 		<< "\tand the original value would remain, otherwise just type your new entry!!!\n";
 
 	cout << "\n\n\t  ID: " << q.id << " (Not changeable)";
@@ -107,44 +113,50 @@ void EditQ(vector<Question>& questions, Question q)
 	cout << "\n\t  Category: ";
 	cin.ignore();
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
+		ValidateInput(input, valid1, valid2, errorM, exit);
 		q.category = input;
 	}
 	cout << "\t  Question: ";
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
+		ValidateInput(input, valid1, valid2, errorM, exit);
 		q.body = input;
 	}
 	cout << "\t  Answer option #1: ";
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
+		ValidateInput(input, valid1, valid2, errorM, exit);
 		q.answers[0] = input;
 	}
 	cout << "\t  Answer option #2: ";
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
+		ValidateInput(input, valid1, valid2, errorM, exit);
 		q.answers[1] = input;
 	}
 	cout << "\t  Answer option #3: ";
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
 		q.answers[2] = input;
 	}
 	cout << "\t  Answer option #4: ";
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
+		ValidateInput(input, valid1, valid2, errorM, exit);
 		q.answers[3] = input;
 	}
 	cout << "\t  Right answer: ";
 	getline(cin, input);
-	if (input != "@!")
+	if (input != noChange)
 	{
+		ValidateInput(input, valid1, valid2, errorM, exit);
 		q.rigthAnswer = input;
 	}
 	AddQuestionToList(questions, q);
@@ -171,17 +183,16 @@ void DeleteQuestion(vector<Question>& questions, Question q, char c)
 	{
 		RewriteFile(questions, level);
 	}
-	
 }
 
 void RewriteFile(vector<Question>& questions, string level)
 {
 	string filename = "level" + level + ".txt";
-	// we open the text file with the trunc option and then close it to delete its contents
+	// opens the text file with the trunc option and then closes it to delete its contents
 	std::fstream file;
 	file.open(filename, std::fstream::out | std::fstream::trunc);
 	file.close();
-	// now we rewrite the file
+	// to rewrite the file
 	for (auto& q : questions)
 	{
 		if (q.level==level)
@@ -198,7 +209,7 @@ void AddQuestionToList(vector<Question>& questions, Question q)
 
 int DisplayQuestions(vector<Question>& questions, string keyword)
 {	
-	int count = 0;
+	int count = 0; // to store the count of the questions that would be displayed
 	// if there isn't a keyword given, print all the questions
 	if (keyword == "")
 	{
@@ -260,51 +271,109 @@ Question* FindQuestionById(vector<Question>& questions, string id)
 	return  NULL;
 }
 
+void ValidateInput(string& input, const string& valid1, const string& valid2, const string& errorM, const string& exit)
+{
+	while (input.find(valid1) != string::npos || input.find(valid2) != string::npos)
+	{
+		if (input == exit)
+		{
+			GoBackToMain();
+		}
+		cout << errorM;
+		getline(cin, input);
+	}
+}
+
 Question GetQuestionFromInput(vector<Question>& questions)
 {
 	srand(static_cast<unsigned int>(time(nullptr)));
-	string answer;
+	string input;
+	const string exit = "&|";   // the string if given as input, would mean the player wants to go back to the main panel
+	const string valid1 = "|";  // to use for the validation since the text in the files is stored and read with these symbols as breakpoints
+	const string valid2 = "&";  // same application as valid1
+	const string errorM = "\a  Invalid input, please try again: ";
 	Question q;
-	cout << "\n\t\t  Fill out the following fields about the question:\n"
-	     << "\t\t//Please refrain using these symbols: '|' and '&'. //\n\n";
+	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+		<< "\tDISCLAIMER: To exit at any time, type '" << exit << "' and you will return to the Hompepage, no changes \n"
+		<< "\twould be saved. Otherwise, please refrain using these symbols: '" << valid1 << "' and '" << valid2 << "'.\n"
+		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+	cout << "\t\t  Fill out the following fields about the question:\n";
 
-	cout << "  Choose from the already available categories or type a new one:\n   | ";
+	cout << "\tChoose from the already available categories or type a new one:\n   | ";
+	int i = 0;
 	for (auto& item : GetCategories(questions))
 	{
+		if (i == 10)
+		{
+			cout << endl;
+			i = 0;
+		}
 		cout << item << " | ";
+		i++;
 	}
 	cout << "\n\n  Category: ";
 	cin.ignore();
-	getline(cin, q.category);
+	getline(cin, input);
+	ValidateInput(input, valid1, valid2, errorM, exit);
+	q.category = input;
+	
 	cout << "  Difficulty level (1 - 10): ";
-	getline(cin, q.level);
+	getline(cin, input);
+	int level = ConvertStringToInt(input);
+	while (level < 1 || level > 10 || level == -1)
+	{
+		if (input == exit)
+		{
+			GoBackToMain();
+		}
+		cout << errorM;
+		getline(cin, input);
+		level = ConvertStringToInt(input);
+	}
+	q.level = input;
+
 	cout << "  Question: ";
-	getline(cin, q.body);
+	getline(cin, input);
+	ValidateInput(input, valid1, valid2, errorM, exit);
+	q.body = input;
+
 	cout << "  Answer option #1 (Right answer): ";
-	getline(cin, q.rigthAnswer);
+	getline(cin, input);
+	ValidateInput(input, valid1, valid2, errorM, exit);
+	q.rigthAnswer = input;
 	q.answers.emplace_back(q.rigthAnswer);
+
 	cout << "  Answer option #2: ";
-	getline(cin, answer);
-	q.answers.emplace_back(answer);
+	getline(cin, input);
+	ValidateInput(input, valid1, valid2, errorM, exit);
+	q.answers.emplace_back(input);
+
 	cout << "  Answer option #3: ";
-	getline(cin, answer);
-	q.answers.emplace_back(answer);
+	getline(cin, input);
+	ValidateInput(input, valid1, valid2, errorM, exit);
+	q.answers.emplace_back(input);
+
 	cout << "  Answer option #4: ";
-	getline(cin, answer);
-	q.answers.emplace_back(answer);
+	getline(cin, input);
+	ValidateInput(input, valid1, valid2, errorM, exit);
+	q.answers.emplace_back(input);
+
 	q.id = to_string(rand());
+
 	AddQuestionToList(questions, q);
+	cout << "\n\n  Question saved successfully!\n";
 	return q;
 }
 
 vector<string> GetCategories(vector<Question>& questions)
 {
-	vector<string> categories;
+	vector<string> categories;  // vector to store the categories' names
 	bool containsCategory = false;
 	for (auto& q : questions)
 	{
 		for (auto& c : categories)
 		{
+			// if the category of the question is already stored, we will just skip to the next one
 			if (q.category==c)
 			{
 				containsCategory = true; 
@@ -326,6 +395,7 @@ QuestionsList QuestionsForGame(vector<Question>& questions, string category)
 	Question q;
 	qList.category = category;
 
+	// to get all of the questions for the category chosen by the player
 	for (int i = 0; i < questions.size(); i++)
 	{
 		q = questions[i];
@@ -337,7 +407,7 @@ QuestionsList QuestionsForGame(vector<Question>& questions, string category)
 	}
 
 	// with this loop we check if there are levels with zero questions 
-	// (which means there aren't questions from this category for that level)
+	// (which means there aren't any questions from this category for the wanted level)
 	// and if there is one (or more) found, then we get the rest of the 
 	// questions for the same level but from different category
 	for (int i = 0; i < 10; i++)

@@ -32,8 +32,8 @@ void Begin(vector<Question>& questions)
 	cout << "\n\t\t" << i + 1 << ". All categories"  << endl;
 
 	cout << "\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-		<< "\tNOTICE: If the category of your choice does not have enough questions to run for the game, then a random\n"
-		<< "\tquestion from the rest of the categories would be chosen at the same difficulty level. \n"
+		<< "\tDISCLAIMER: If the category of your choice does not have enough questions to run for the game, then a \n"
+		<< "\trandom question from the rest of the categories would be chosen at the same difficulty level. \n"
 		<< "\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 	cout << "\n\tType the number of your chosen category (to go back, type 'M'): ";
 	
@@ -295,7 +295,7 @@ void DisplayQ(Game& g)
 	int spaces = 20; // set the default space place between two answers in a line to be 20 spaces 
 	int spaces2 = spaces;
 
-	// if either answe 1 or 3 is longer than the other, we calculate the difference between their 
+	// if either answer 1 or 3 is longer than the other, we calculate the difference between their 
 	// lengths and add it as spaces to the shorter one  
 	if (q.answers[0].size() < q.answers[2].size())
 	{

@@ -19,4 +19,6 @@ void sortIntArr(int*& arr, int n);
 
 void SwapInt(int& a, int& b);
 
+void GoBackToMain();
+
 #endif

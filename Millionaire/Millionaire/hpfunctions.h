@@ -18,6 +18,6 @@ void EditQuestionHome(std::vector<Question>& questions);
 
 void InvalidInput();
 
-void GoBackToMain();
+
 
 #endif
